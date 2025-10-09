@@ -26,7 +26,7 @@ Class Users extends Model{
 				$this->userInfo = $sql->fetch();
 				
 				$this->permissions = new Permissions();
-				$this->permissions->setGroup($this->userInfo['id_group']);
+				$this->permissions->setGroup($this->userInfo->id_group);
 			}
 		}
 	}
@@ -82,7 +82,7 @@ Class Users extends Model{
 	}
 
 	public function getName(){
-		return $this->userInfo["name"];
+		return $this->userInfo->name;
 	}
 	public function getTypeUser(){
 		return $this->userInfo["type"];
