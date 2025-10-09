@@ -62,8 +62,8 @@ Class Users extends Model{
 		if($sql->rowCount() > 0){
 			$row = $sql->fetch();
 
-			if(password_verify($password, $row["password"])){
-				$_SESSION[CONF_SESSION_NAME] = $row["id"];
+			if(password_verify($password, $row->password)){
+				$_SESSION[CONF_SESSION_NAME] = $row->id;
 				return true;
 			}else{
 				return false;

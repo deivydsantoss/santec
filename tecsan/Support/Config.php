@@ -23,7 +23,7 @@ if(ENVIRONMENT == 'development'){
 	/**
 	 * PROJECT URLs
 	 */ 
-	define("BASE_URL", "http://localhost/structure_pattern/");
+	define("BASE_URL", "http://localhost/santec/tecsan/");
 	define("BASE_URL_ADMIN", BASE_URL."Admin");
 	
 	/**
@@ -82,9 +82,8 @@ try{
 		"mysql:dbname=".CONF_DB_NAME.";charset=utf8;host=".CONF_DB_HOST, 
 		CONF_DB_USER, 
 		CONF_DB_PASS,
-		[
-			$config['options']
-		]
+		$config['options']
+		
 	);
 } catch(PDOException $e){
 	echo "Erro: ".$e->getMessage();

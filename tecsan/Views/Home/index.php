@@ -9,4 +9,4 @@
 <hr>
 <div class="about_me">
     <p><?= $about_me?></p>
-</div>
+</div>                                                              
