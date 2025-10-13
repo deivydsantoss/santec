@@ -7,7 +7,7 @@ class LoginController extends Controller
 
 		//verifico se o usuário já está logado
 		$user = new Users();
-		if($user->isLogged() == true){
+		if($user->isLogged() == false){
 			header("Location: ".BASE_URL."Admin");
 		}else{
 			//caso não esteja tentamos fazer o login
