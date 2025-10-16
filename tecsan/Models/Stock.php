@@ -45,16 +45,57 @@ Class Stock extends Model{
         }
     }
 
-
-    public function deleteProduct($id_product){
-        $sql = $this->db->prepare("UPDATE products SET situation = 0 WHERE id_product = :id_product");
-		$sql->bindValue(":id_product", $id_product);
-		$sql->execute();
+    public function trashProduct($id_product){
+        $sql = $this->db->prepare("UPDATE products SET situation = '0' WHERE id_product = :id_product");
+        $sql->bindValue(":id_product", $id_product);
+        $sql->execute();
     }
+
+    public function deleteProduct($delete){
+        $sql = $this->db->prepare("DELETE FROM products WHERE id_product = :id_product");
+        $sql->bindValue(":id_product", $delete);
+        $sql->execute();
+    }
+
 
     public function getList(){
         $data = array();
-		$sql = $this->db->prepare("SELECT name_product, description, price, quantity FROM products INNER JOIN category ON products.id_category = category.name_category WHERE situation = '1' ");
+		$sql = $this->db->prepare(
+            "SELECT
+                P.id_product,
+                P.name_product,
+                P.description,
+                P.price,
+                P.quantity,
+                C.name_category
+            FROM products AS P
+            INNER JOIN category AS C
+                ON C.id_category = P.id_category
+            WHERE P.situation = '1'"
+            );
+		$sql->execute();
+
+		if($sql->rowCount()>0){
+			$data = $sql->fetchAll(PDO::FETCH_ASSOC);
+		}
+		return $data;
+    }
+
+    public function getListTrash(){
+        $data = array();
+		$sql = $this->db->prepare(
+            "SELECT
+                P.id_product,
+                P.name_product,
+                P.description,
+                P.price,
+                P.quantity,
+                C.name_category
+            FROM products AS P
+            INNER JOIN category AS C
+                ON C.id_category = P.id_category
+            WHERE P.situation = '0'"
+            );
 		$sql->execute();
 
 		if($sql->rowCount()>0){

@@ -86,15 +86,25 @@ Class StockController extends Controller {
             }
 
 
-            //  Excluir produto
+            //  Mover o produto para lixeira 
             if (!empty($_POST['id_product'])) {
                 $id_product = intval($_POST['id_product']);
-                $stock->deleteProduct($id_product);
+                $stock->trashProduct($id_product);
             }
-            
+
+            //  Excluir produto
+            if (!empty($_POST['delete'])) {
+                $delete = intval($_POST['delete']);
+                $stock->deleteProduct($delete);
+            }
+
 
             //  Listar produtos
             $this->data['products_list'] = $stock->getList();
+
+            //  Listar produtos
+            $this->data['products_trash'] = $stock->getListTrash();
+
 
             // Listar Categorias
             $this->data['category_list'] = $category->getCategory();
