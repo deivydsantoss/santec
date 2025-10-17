@@ -28,15 +28,15 @@ Class Stock extends Model{
 
     }
 
-    public function editProduct($name_product, $description, $category,$quantity,$price,$id){
+    public function editProduct($name_product, $description,$quantity,$price,$id_category){
         
-        $sql = $this->db->prepare("UPDATE permission_groups SET name_product = :name, description = :description, category = :category, price = :price, quantity WHERE id = :id");
-        $sql->bindValue(":name", $name_product);
+        $sql = $this->db->prepare("UPDATE products SET name_product = :name_product, description = :description, id_category = :id_category, price = :price, quantity = :quantity WHERE id_product = :id_product");
+        $sql->bindValue(":name_product", $name_product);
 		$sql->bindValue(":description", $description);
-		$sql->bindValue(":category", $category);
         $sql->bindValue(":price", $price);
         $sql->bindValue(":quantity", $quantity);
-        $sql->bindValue(":id", $id);
+        $sql->bindValue(":id_category", $id_category);
+
 
         if ($sql->execute()) {
             return  true;
@@ -45,15 +45,21 @@ Class Stock extends Model{
         }
     }
 
-    public function trashProduct($id_product){
+    public function MoveToTrashProduct($id_product){
         $sql = $this->db->prepare("UPDATE products SET situation = '0' WHERE id_product = :id_product");
         $sql->bindValue(":id_product", $id_product);
         $sql->execute();
     }
 
+    public function RemoveToTrashProduct($id_product){
+        $sql = $this->db->prepare("UPDATE products SET situation = '1' WHERE id_product = :id_product");
+        $sql->bindValue(":id_product", $id_product);
+        $sql->execute();
+    }
+
     public function deleteProduct($delete){
-        $sql = $this->db->prepare("DELETE FROM products WHERE id_product = :id_product");
-        $sql->bindValue(":id_product", $delete);
+        $sql = $this->db->prepare("DELETE FROM products WHERE id_product = :delete");
+        $sql->bindValue(":delete", $delete);
         $sql->execute();
     }
 

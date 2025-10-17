@@ -67,9 +67,7 @@ Class StockController extends Controller {
             }
 
             //  Adicionar novo produto
-            // var_dump($_POST);
-            // exit;
-            if (!empty($_POST['name']) && !empty($_POST['quantity']) && !empty($_POST['description']) && !empty($_POST['id_category']) && !empty($_POST['price'])) {
+            if (isset($_REQUEST['add'])) {
                 $name_product = addslashes(trim($_POST['name']));
                 $description = addslashes(trim($_POST['description']));
                 $id_category = addslashes(trim($_POST['id_category']));
@@ -83,13 +81,42 @@ Class StockController extends Controller {
                     $stock->addProduct($name_product, $description, $id_category, $quantity, $price);
                 }
 
+                redirect('Home');
+
             }
+
+            //  Editar novo produto
+            // if (!empty($_POST['name_product']) && !empty($_POST['quantity']) && !empty($_POST['description']) && !empty($_POST['id_category']) && !empty($_POST['price'])) {
+            if (isset($_REQUEST['edit'])) {
+                $name_product = addslashes(trim($_POST['name']));
+                $description = addslashes(trim($_POST['description']));
+                $id_category = addslashes(trim($_POST['id_category']));
+                $quantity = intval($_POST['quantity']);
+                $price = floatval($_POST['price']);
+
+                
+                if ($quantity < 0 || $price < 0) {
+                    $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
+                } else {
+                    
+                    $stock->editProduct($name_product, $description, $id_category, $quantity, $price);
+                }
+
+            }
+            
+
+            //  Remover o produto para lixeira 
+            if (!empty($_POST['id_product'])) {
+                $id_product = intval($_POST['id_product']);
+                $stock->RemoveToTrashProduct($id_product);
+            }
+
 
 
             //  Mover o produto para lixeira 
             if (!empty($_POST['id_product'])) {
                 $id_product = intval($_POST['id_product']);
-                $stock->trashProduct($id_product);
+                $stock->MoveToTrashProduct($id_product);
             }
 
             //  Excluir produto
@@ -102,7 +129,7 @@ Class StockController extends Controller {
             //  Listar produtos
             $this->data['products_list'] = $stock->getList();
 
-            //  Listar produtos
+            //  Listar produtos da lixeira
             $this->data['products_trash'] = $stock->getListTrash();
 
 

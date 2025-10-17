@@ -63,20 +63,18 @@
 																<td><?= $products['price']; ?></td>
 																<td><?= $products['name_category']; ?></td>
 																<td class="table-action" width="75">
-																	<form action="">
+																	<form method="POST">
 																		<input type="hidden" class="form-control" name="out_trash" id="params_name" value="<?= $products['id_product']; ?>">
-																		<a data-bs-toggle="modal" data-bs-target="#editProduct<?= $products['id_product']; ?>" class="me-2">
-																			<i class="text-info" data-feather="check"></i>
-																		</a>
+																		<button type="submit" data-bs-toggle="modal" data-bs-target="#editProduct<?= $products['id_product']; ?>" class="mb-1 btn btn-info">
+																			<i class="text-light" data-feather="refresh-ccw"></i>
+																		</button>
 																	</form>
-																	<form method="$_POST">
+																	<form method="POST">
 																		<input type="hidden" class="form-control" name="delete" id="params_name" value="<?= $products['id_product']; ?>">
-																		<a data-bs-toggle="modal" data-bs-target="#deleteProduct<?= $products['id_product']; ?>" class="">
-																			<i class="text-danger" data-feather="delete"></i>
-																		</a>
+																		<button type="submit" data-bs-toggle="modal" data-bs-target="#deleteProduct<?= $products['id_product']; ?>" class="btn btn-danger">
+																			<i class="text-light" data-feather="delete"></i>
+																		</button>
 																	</form>
-																	
-
 																</td>
 
 															</tr>
@@ -140,7 +138,7 @@
 											</div>
 											<div class="modal-footer d-flex justify-content-end">
 												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-												<button type="submit" name="submit" class="btn btn-info">Adicionar Produto</button>
+												<button type="submit" name="add" class="btn btn-info">Adicionar Produto</button>
 											</div>
 										</form>
 									</div>
@@ -193,44 +191,45 @@
 													<div class="modal-body">
 														<div class="row">
 															<div class="col-md-12 mb-3">
-																<div class="form-group">
-																	<label for="params_name" class="form-label">Nome do Produto</label>
-																	<input type="text" class="form-control" name="name" id="params_name" placeholder="<?= $products['name_product']; ?>" required>
+																<label for="params_description" class="form-label">Categoria do Produto</label>
+																<div>
+																	<select class="form-select" aria-label="Default select example" name="id_category">
+																		<option value="" selected>Selecione a categoria</option>
+																		<?php foreach ($category_list as $category) : ?>
+																			<option value="<?= $category['id_category']; ?>"><?= $category['name_category']; ?></option>
+																		<?php endforeach; ?>
+																	</select>
 																</div>
 															</div>
 															<div class="col-md-12 mb-3">
-																<label for="params_description" class="form-label">Categoria do Produto</label>
-
-																<select class="form-select" aria-label="Default select example">
-																	<option selected>Open this select menu</option>
-																	<option value="1">Processador</option>
-																	<option value="2">Unidade de Armazenamento</option>
-																	<option value="3">Fonte</option>
-																</select>
+																<div class="form-group">
+																	<label for="params_name" class="form-label">Nome do Produto</label>
+																	<input type="text" class="form-control" name="name" id="params_name" value="<?= $products['name_product']; ?>" required>
+																</div>
 															</div>
 															<div class="col-md-12 mb-3">
 																<div class="form-group">
 																	<label for="params_name" class="form-label">Quantidade do Produto</label>
-																	<input type="text" class="form-control" name="quantity" id="params_name" placeholder="<?= $products['quantity']; ?>" required>
+																	<input type="text" class="form-control" name="quantity" id="params_name" value="<?= $products['quantity']; ?>" required>
 																</div>
 															</div>
 															<div class="col-md-12 mb-3">
 																<div class="form-group">
 																	<label for="params_name" class="form-label">Preço do Produto</label>
-																	<input type="text" class="form-control" name="price" id="params_name" placeholder="<?= $products['price']; ?>" required>
+																	<input type="text" class="form-control" name="price" id="params_name" value="<?= $products['price']; ?>" required>
 																</div>
 															</div>
 															<div class="col-md-12">
 																<div class="form-group">
 																	<label for="params_description" class="form-label">Descrição do Produto</label>
-																	<input type="text" class="form-control" name="description" id="params_description" placeholder="<?= $products['description']; ?>" value="" required>
+																	<input type="text" class="form-control" name="description" id="params_description" value="<?= $products['description']; ?>" value="" required>
 																</div>
 															</div>
 														</div>
 													</div>
 													<div class="modal-footer d-flex justify-content-end">
 														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-														<button type="submit" name="submit" class="btn btn-info">Editar Produto</button>
+														<button type="submit" name="edit" class="btn btn-info">Editar Produto</button>
 													</div>
 													</form>
 												</div>
@@ -238,7 +237,7 @@
 										</div>
 										<!-- FIM MODAL EDITAR PRODUTOS -->
 
-										<!-- MODAL DELETAR PRODUTOS -->
+										<!-- MODAL MOVER PARA LIXEIRA PRODUTOS -->
 										<div class="modal fade" id="deleteProduct<?= $products['id_product']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
 											<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
 												<div class="modal-content">
@@ -251,20 +250,20 @@
 																<div class="col-md-12">
 
 																	<h3>ATENÇÃO</h3>
-																	<p class="text-muted fs-5">Ao deletar o nome do parâmetro, certifique-se que foram feita as devidas analises.</p>
+																	<p class="text-muted fs-5">Ao deletar o <?= $products['name_product']?>, certifique-se que foram feita as devidas analises.</p>
 																</div>
 															</div>
 														</div>
 														<div class="modal-footer d-flex justify-content-end">
 															<input type="hidden" class="form-control" name="id_product" id="params_name" value="<?= $products['id_product']; ?>">
 															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-															<button type="submit" class="btn btn-danger">Deletar</button>
+															<button type="submit" class="btn btn-danger">Mover para lixeria</button>
 														</div>
 													</form>
 												</div>
 											</div>
 										</div>
-										<!-- FIM MODAL DELETAR PRODUTOS -->
+										<!-- FIM MODAL MOVER PARA LIXEIRA PRODUTOS -->
 									<?php endforeach; ?>
 								<?php endif; ?>
 							</tbody>
