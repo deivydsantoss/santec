@@ -16,27 +16,6 @@ Class StockController extends Controller {
 		}
 	}
 
-    public function createProduct(){
-
-        $stock = new Stock(); // Model responsável pelo banco de dados
-        
-            if (!empty($_POST['name']) && !empty($_POST['quantity']) && !empty($_POST['description']) && !empty($_POST['category']) && !empty($_POST['price'])) {
-                $name_product = addslashes(trim($_POST['name']));
-                $description = addslashes(trim($_POST['description']));
-                $category = addslashes(trim($_POST['category']));
-                $quantity = intval($_POST['quantity']);
-                $price = floatval($_POST['price']);
-                
-                if ($quantity < 0 || $price < 0) {
-                    $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
-                } else {
-                    
-                    $stock->addProduct($name_product, $description, $category, $quantity, $price);
-                }
-
-            }
-    }
-
     public function index()
     {
         $this->data['title'] = 'Gestão de Estoque';
@@ -45,8 +24,6 @@ Class StockController extends Controller {
         $user = new Users();
         $user->setLoggedUser();
 
-        // echo 'oi';
-        // return 'oi';
 
         
         if (!$user->hasPermission('manage_stock')) {
@@ -54,6 +31,7 @@ Class StockController extends Controller {
 
             $stock = new Stock(); // Model responsável pelo banco de dados
             $category = new Category(); // Model responsável pelo banco de dados
+            $maker = new Maker(); // Model responsável pelo banco de dados
 
             // Mensagens de sucesso
             if (!empty($success)) {
@@ -67,10 +45,11 @@ Class StockController extends Controller {
             }
 
             //  Adicionar novo produto
-            if (isset($_REQUEST['add'])) {
+            if (isset($_REQUEST['newproduct'])) {
                 $name_product = addslashes(trim($_POST['name']));
                 $description = addslashes(trim($_POST['description']));
                 $id_category = addslashes(trim($_POST['id_category']));
+                $id_maker = addslashes(trim($_POST['id_maker']));
                 $quantity = intval($_POST['quantity']);
                 $price = floatval($_POST['price']);
                 
@@ -78,19 +57,29 @@ Class StockController extends Controller {
                     $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
                 } else {
                     
-                    $stock->addProduct($name_product, $description, $id_category, $quantity, $price);
+                    $stock->addProduct($name_product, $description, $id_category, $quantity, $price, $id_maker);
                 }
 
-                redirect('Home');
+                redirect('Stock');
 
             }
 
+            //  Adicionar nova categoria
+            if (!empty($_POST['id_category'])) {
+
+                $id_category = addslashes(trim($_POST['id_category']));
+              
+                $category->addCategory( $id_category);
+                redirect('Stock');
+            }
+
+
             //  Editar novo produto
-            // if (!empty($_POST['name_product']) && !empty($_POST['quantity']) && !empty($_POST['description']) && !empty($_POST['id_category']) && !empty($_POST['price'])) {
             if (isset($_REQUEST['edit'])) {
                 $name_product = addslashes(trim($_POST['name']));
                 $description = addslashes(trim($_POST['description']));
                 $id_category = addslashes(trim($_POST['id_category']));
+                $id_makers = addslashes(trim($_POST['id_makers']));
                 $quantity = intval($_POST['quantity']);
                 $price = floatval($_POST['price']);
 
@@ -99,19 +88,16 @@ Class StockController extends Controller {
                     $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
                 } else {
                     
-                    $stock->editProduct($name_product, $description, $id_category, $quantity, $price);
+                    $stock->editProduct($name_product, $description, $id_category, $quantity, $price, $id_makers);
                 }
 
             }
-            
 
             //  Remover o produto para lixeira 
-            if (!empty($_POST['id_product'])) {
-                $id_product = intval($_POST['id_product']);
-                $stock->RemoveToTrashProduct($id_product);
+            if (!empty($_POST['restore'])) {
+                $id_product = intval($_POST['restore']);
+                $stock->restoreProduct($id_product);
             }
-
-
 
             //  Mover o produto para lixeira 
             if (!empty($_POST['id_product'])) {
@@ -132,10 +118,11 @@ Class StockController extends Controller {
             //  Listar produtos da lixeira
             $this->data['products_trash'] = $stock->getListTrash();
 
-
             // Listar Categorias
             $this->data['category_list'] = $category->getCategory();
-
+            
+            // Listar Fabricantes
+            $this->data['makers_list'] = $maker->getMaker();
 
             // Scripts e visual
             $this->data['JS'] = '

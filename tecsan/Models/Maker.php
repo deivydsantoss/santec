@@ -1,6 +1,6 @@
 <?php
 
-Class Category extends Model{
+Class Maker extends Model{
 
     private $permissions;
 
@@ -13,17 +13,17 @@ Class Category extends Model{
         }
     }
 
-    public function addCategory($name_category){
-        $sql = $this->db->prepare("INSERT INTO category SET  name_category = :name_category");
-		$sql->bindValue(":name_category", $name_category);
+    public function addMaker($name_maker){
+        $sql = $this->db->prepare("INSERT INTO makers SET  name_maker = :name_maker, situation = '1'");
+		$sql->bindValue(":name_maker", $name_maker);
 		$sql->execute();
 
 		return $this->db->lastInsertId();
     }
 
-    public function getCategory(){
+    public function getMaker(){
         $data = array();
-		$sql = $this->db->prepare("SELECT * FROM category");
+		$sql = $this->db->prepare("SELECT * FROM makers");
 		$sql->execute();
 
 		if($sql->rowCount()>0){
