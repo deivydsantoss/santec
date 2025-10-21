@@ -4,8 +4,7 @@ Class StockController extends Controller {
     
     private $data = array();
 
-    public function __construct()
-	{
+    public function __construct(){
 		$user = new Users();
 		if (!$user->isLogged()) {
 			header('Location: ' . BASE_URL . 'Login');
@@ -64,33 +63,39 @@ Class StockController extends Controller {
 
             }
 
-            //  Adicionar nova categoria
-            if (!empty($_POST['id_category'])) {
 
-                $id_category = addslashes(trim($_POST['id_category']));
-              
-                $category->addCategory( $id_category);
-                redirect('Stock');
-            }
-
-
-            //  Editar novo produto
-            if (isset($_REQUEST['edit'])) {
+            //  Editar o produto
+    
+            if (isset($_POST['edit'])) {
+                $id_product = intval($_POST['id_product']);
                 $name_product = addslashes(trim($_POST['name']));
                 $description = addslashes(trim($_POST['description']));
                 $id_category = addslashes(trim($_POST['id_category']));
                 $id_makers = addslashes(trim($_POST['id_makers']));
                 $quantity = intval($_POST['quantity']);
                 $price = floatval($_POST['price']);
-
+                
+            
                 
                 if ($quantity < 0 || $price < 0) {
                     $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
                 } else {
-                    
-                    $stock->editProduct($name_product, $description, $id_category, $quantity, $price, $id_makers);
+                    // var_dump($_POST);
+                    // exit;
+                    $stock->editProduct($name_product, $description,$quantity,$price,$id_category, $id_makers,$id_product);
+                    redirect('Stock');
                 }
 
+            }
+            
+
+            //  Adicionar nova categoria
+            if (!empty($_POST['category'])) {
+
+                $id_category = addslashes(trim($_POST['category']));
+              
+                $category->addCategory( $id_category);
+                redirect('Stock');
             }
 
             //  Remover o produto para lixeira 

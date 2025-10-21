@@ -171,7 +171,7 @@
 													<div class="col-md-12">
 														<div class="form-group">
 															<label for="params_name" class="form-label">Digite sua categoria</label>
-															<input type="text" class="form-control" name="id_category" id="params_name" value="" required>
+															<input type="text" class="form-control" name="category" id="params_name" value="" required>
 														</div>
 													</div>
 												</div>
@@ -219,13 +219,13 @@
 							<thead>
 								<tr>
 									<th>Categoría
-										<a class=" btn-info" data-bs-toggle="modal" data-bs-target="#addCategory">
+										<a class="badge badge-circle rounded-circle bg-info ms-2" data-bs-toggle="modal" data-bs-target="#addCategory">
 											<i class="text-light" data-feather="plus"></i>
 										</a>
 									</th>
 									<th>Modelo</th>
-									<th>Fabricante
-										<a class=" btn-info" data-bs-toggle="modal" data-bs-target="#addMaker">
+									<th class="">Fabricante
+										<a class="badge badge-circle rounded-circle bg-info ms-2" data-bs-toggle="modal" data-bs-target="#addMaker">
 											<i class="text-light" data-feather="plus"></i>
 										</a>
 									</th>
@@ -266,61 +266,63 @@
 										<div class="modal fade" id="editProduct<?= $products['id_product']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
 											<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
 												<div class="modal-content">
-													<div class="modal-body">
-														<div class="row">
-															<div class="col-md-12 mb-3">
-																<label for="params_description" class="form-label">Categoria do Produto</label>
-																<div>
-																	<select class="form-select" aria-label="Default select example" name="id_category">
-																		<option value="" selected>Selecione a categoria</option>
-																		<?php foreach ($category_list as $category) : ?>
-																			<option value="<?= $category['id_category']; ?>"><?= $category['name_category']; ?></option>
-																		<?php endforeach; ?>
-																	</select>
+													<form method="POST">
+														<div class="modal-body">
+															<div class="row">
+																<div class="col-md-12 mb-3">
+																	<label for="params_description" class="form-label">Categoria do Produto</label>
+																	<div>
+																		<select class="form-select" aria-label="Default select example" name="id_category">
+																			<option value="" selected>Selecione a categoria</option>
+																			<?php foreach ($category_list as $category) : ?>
+																				<option value="<?= $category['id_category']; ?>" <?= $category['id_category'] == $products['id_category'] ? 'selected' : '' ?>><?= $category['name_category']; ?></option>
+																			<?php endforeach; ?>
+																		</select>
+																	</div>
 																</div>
-															</div>
-															<div class="col-md-12 mb-3">
-																<div class="form-group">
-																	<label for="params_name" class="form-label">Nome do Produto</label>
-																	<input type="text" class="form-control" name="name" id="params_name" value="<?= $products['name_product']; ?>" required>
+																<div class="col-md-12 mb-3">
+																	<div class="form-group">
+																		<label for="params_name" class="form-label">Nome do Produto</label>
+																		<input type="text" class="form-control" name="name" id="params_name" value="<?= $products['name_product']; ?>" required>
+																	</div>
 																</div>
-															</div>
-															<div class="col-md-12 mb-3">
-																<label for="params_description" class="form-label">Fabricante do Produto</label>
-																<div>
-																	<select class="form-select" aria-label="Default select example" name="id_makers">
-																		<option value="" selected>Selecione o fabricante</option>
-																		<?php foreach ($makers_list as $maker) : ?>
-																			<option value="<?= $maker['id_makers']; ?>"><?= $maker['name_maker']; ?></option>
-																		<?php endforeach; ?>
-																	</select>
+																<div class="col-md-12 mb-3">
+																	<label for="params_description" class="form-label">Fabricante do Produto</label>
+																	<div>
+																		<select class="form-select" aria-label="Default select example" name="id_makers">
+																			<option value="" selected>Selecione o fabricante</option>
+																			<?php foreach ($makers_list as $maker) : ?>
+																				<option value="<?= $maker['id_makers']; ?>" <?= $maker['id_makers'] == $products['id_maker'] ? 'selected' : '' ?>><?= $maker['name_maker']; ?></option>
+																			<?php endforeach; ?>
+																		</select>
+																	</div>
 																</div>
-															</div>
 
-															<div class="col-md-12 mb-3">
-																<div class="form-group">
-																	<label for="params_name" class="form-label">Quantidade do Produto</label>
-																	<input type="text" class="form-control" name="quantity" id="params_name" value="<?= $products['quantity']; ?>" required>
+																<div class="col-md-12 mb-3">
+																	<div class="form-group">
+																		<label for="params_name" class="form-label">Quantidade do Produto</label>
+																		<input type="text" class="form-control" name="quantity" id="params_name" value="<?= $products['quantity']; ?>" required>
+																	</div>
 																</div>
-															</div>
-															<div class="col-md-12 mb-3">
-																<div class="form-group">
-																	<label for="params_name" class="form-label">Preço do Produto</label>
-																	<input type="text" class="form-control" name="price" id="params_name" value="<?= $products['price']; ?>" required>
+																<div class="col-md-12 mb-3">
+																	<div class="form-group">
+																		<label for="params_name" class="form-label">Preço do Produto</label>
+																		<input type="text" class="form-control" name="price" id="params_name" value="<?= $products['price']; ?>" required>
+																	</div>
 																</div>
-															</div>
-															<div class="col-md-12">
-																<div class="form-group">
-																	<label for="params_description" class="form-label">Descrição do Produto</label>
-																	<input type="text" class="form-control" name="description" id="params_description" value="<?= $products['description']; ?>" value="" required>
+																<div class="col-md-12">
+																	<div class="form-group">
+																		<label for="params_description" class="form-label">Descrição do Produto</label>
+																		<input type="text" class="form-control" name="description" id="params_description" value="<?= $products['description']; ?>" value="" required>
+																	</div>
 																</div>
 															</div>
 														</div>
-													</div>
-													<div class="modal-footer d-flex justify-content-end">
-														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-														<button type="submit" name="edit" class="btn btn-info">Editar Produto</button>
-													</div>
+														<div class="modal-footer d-flex justify-content-end">
+															<input type="hidden" class="form-control" name="id_product" id="params_name" value="<?= $products['id_product']; ?>">
+															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+															<button type="submit" name="edit" class="btn btn-info">Editar Produto</button>
+														</div>
 													</form>
 												</div>
 											</div>
