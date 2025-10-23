@@ -54,7 +54,7 @@
                     </li>
                     <!-- Orders -->
                     <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Pedidos") ? 'active' : ''; ?>">
-                        <a class="sidebar-link" href="<?= BASE_URL . 'Home'; ?>">
+                        <a class="sidebar-link" href="<?= BASE_URL . 'Orders'; ?>">
                             <i class="" data-feather="clipboard"></i>
                             <span class="align-middle">Pedidos</span>
                         </a>
