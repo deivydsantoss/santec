@@ -22,8 +22,6 @@ Class StockController extends Controller {
 
         $user = new Users();
         $user->setLoggedUser();
-
-
         
         if (!$user->hasPermission('manage_stock')) {
 
@@ -43,29 +41,8 @@ Class StockController extends Controller {
                 }
             }
 
-            //  Adicionar novo produto
-            if (isset($_REQUEST['newproduct'])) {
-                $name_product = addslashes(trim($_POST['name']));
-                $description = addslashes(trim($_POST['description']));
-                $id_category = addslashes(trim($_POST['id_category']));
-                $id_maker = addslashes(trim($_POST['id_maker']));
-                $quantity = intval($_POST['quantity']);
-                $price = floatval($_POST['price']);
-                
-                if ($quantity < 0 || $price < 0) {
-                    $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
-                } else {
-                    
-                    $stock->addProduct($name_product, $description, $id_category, $quantity, $price, $id_maker);
-                }
-
-                redirect('Stock');
-
-            }
-
 
             //  Editar o produto
-    
             if (isset($_POST['edit'])) {
                 $id_product = intval($_POST['id_product']);
                 $name_product = addslashes(trim($_POST['name']));
@@ -142,6 +119,31 @@ Class StockController extends Controller {
             $this->loadTemplateAdmin('Stock/index', $this->data);
         } else {
             redirect('Home');
+        }
+    }
+
+    public function createProduct()
+    {
+        $stock = new Stock();
+
+        //  Adicionar novo produto
+        if (isset($_REQUEST['newproduct'])) {
+            $name_product = addslashes(trim($_POST['name']));
+            $description = addslashes(trim($_POST['description']));
+            $id_category = addslashes(trim($_POST['id_category']));
+            $id_maker = addslashes(trim($_POST['id_maker']));
+            $quantity = intval($_POST['quantity']);
+            $price = floatval($_POST['price']);
+                
+            if ($quantity < 0 || $price < 0) {
+                    $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
+            } else {
+                    
+                $stock->addProduct($name_product, $description, $id_category, $quantity, $price, $id_maker);
+            }
+
+            redirect('Stock');
+
         }
     }
 }

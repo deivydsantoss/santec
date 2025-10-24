@@ -3,16 +3,7 @@
 
 		<div class="row mb-2 mb-xl-3">
 			<div class="col-auto d-none d-sm-block">
-				<h3><strong>Pedidos</strong></h3>
-			</div>
-
-			<div class="col-auto ms-auto text-end mt-n1">
-				<nav aria-label="breadcrumb">
-					<ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
-						<li class="breadcrumb-item"><a href="#">Em andamento</a></li>
-						<li class="breadcrumb-item active" aria-current="page"><a href="<?= BASE_URL . 'Orders/ordersConcluded' ?>">Realizados</a></li>
-					</ol>
-				</nav>
+				<h3><strong><a class="text-decoration-none" href="<?= BASE_URL . 'Orders/index' ?>">Pedidos</a></strong></h3>
 			</div>
 		</div>
 
@@ -22,15 +13,9 @@
 					<div class="card-header">
 						<div class="row">
 							<div class="col-md-6">
-								<h5 class="card-title mb-0">Pedidos</h5>
+								<h5 class="card-title mb-0">Realizados</h5>
 							</div>
-							<div class="col-md-6 text-end">
-								<a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#addOrders">Novo Pedido</a>
-
-								<a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ordersPlaced">
-									<i class="text-light" data-feather="check-square"></i>
-								</a>
-							</div>
+							
 
 							<!-- MODAL CRIAR PEDIDOS -->
 							<div class="modal fade" id="addOrders" tabindex="-1" role="dialog" aria-hidden="true"> 
@@ -94,13 +79,13 @@
 											</div>
 											<div class="modal-footer d-flex justify-content-end">
 												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-												<button type="submit" name="newproduct" class="btn btn-info">Adicionar Pedido</button>
+												<button type="submit" name="newproduct" class="btn btn-info">Adicionar Produto</button>
 											</div>
 										</form>
 									</div>
 								</div>
 							</div>
-							<!-- FIM MODAL CRIAR PEDIDOS -->
+							<!-- FIM MODAL CRIAR PRODUTOS -->
 
 						</div>
 						<hr>
@@ -110,15 +95,12 @@
 						<table id="datatables-reponsive" class="table dataTable no-footer dtr-inline table-hover" style="width: 100%;" role="grid" aria-describedby="datatables-reponsive_info">
 							<thead>
 								<tr>
-									<th>Compra</th>
-									<th>Prazo</th>
-									<th>Entregua</th>
+									<th>Data</th>
 									<th>Modelo</th>
 									<th>Fabricante</th>
 									<th>Quantidade</th>
 									<th>Preço Total</th>
 									<th>Preço Unitário</th>
-									<th>Realizado</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -126,24 +108,42 @@
 								<?php if (isset($orders_list)) : ?>
 									<?php foreach ($orders_list as $order) : ?>
 										<tr>
-											<td><?= $order['purchase_date']; ?></td>
-											<td><?= $order['delivery_time']; ?></td>
-											<td><?= $order['delivery_date']; ?></td>
+											<td><?= $order['date']; ?></td>
 											<td><?= $order['name_product']; ?></td>
 											<td><?= $order['name_maker']; ?></td>
 											<td><?= $order['quantity']; ?></td>
 											<td><?= $order['total_price']; ?></td>
 											<td><?= $order['unit_price']; ?></td>
-											<td class="table-action align-content-center" width="75">
-												<div class="d-flex">
-													<a data-bs-toggle="modal" data-bs-target="#deleteOrder<?= $order['id_order']; ?>" class="me-2">
-														<i class="text-success" data-feather="check-square"></i>
-													</a>
-													
-												</div>
-											</td>
-
 										</tr>
+
+										<!-- MODAL MOVER PARA LIXEIRA PRODUTOS -->
+										<div class="modal fade" id="deleteProduct<?= $order['id_product']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+											<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<form method="POST">
+														<div class="modal-body">
+															<div class="row">
+																<div class="col-md-12">
+
+																	<h3>ATENÇÃO</h3>
+																	<p class="text-muted fs-5">Ao deletar o <?= $products['name_product'] ?>, certifique-se que foram feita as devidas analises.</p>
+																</div>
+															</div>
+														</div>
+														<div class="modal-footer d-flex justify-content-end">
+															<input type="hidden" class="form-control" name="id_product" id="params_name" value="<?= $products['id_product']; ?>">
+															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+															<button type="submit" class="btn btn-danger">Mover para lixeria</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- FIM MODAL MOVER PARA LIXEIRA PRODUTOS -->
+
 
 									<?php endforeach; ?>
 								<?php endif; ?>

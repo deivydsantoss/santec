@@ -9,8 +9,8 @@
 			<div class="col-auto ms-auto text-end mt-n1">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
-						<li class="breadcrumb-item"><a href="#">Disponiveis</a></li>
-						<li class="breadcrumb-item active" aria-current="page"><a href="#">Indisponiveis</a></li>
+						<li class="breadcrumb-item"><a href="#">Banco de Dados do Fornecedor</a></li>
+						<li class="breadcrumb-item active" aria-current="page"><a href="#">Em falta</a></li>
 					</ol>
 				</nav>
 			</div>
@@ -99,7 +99,7 @@
 											Adicionar Produto
 											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
-										<form method="POST">
+										<form method="POST" action="<?= BASE_URL . 'Stock/createProduct' ?>">
 											<div class="modal-body">
 												<div class="row">
 													<div class="col-md-12 mb-3">
