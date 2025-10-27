@@ -90,17 +90,19 @@
 						</div>
 						<hr>
 					</div>
-					<div class="card-body">
 
+					<div class="card-body">
 						<table id="datatables-reponsive" class="table dataTable no-footer dtr-inline table-hover" style="width: 100%;" role="grid" aria-describedby="datatables-reponsive_info">
 							<thead>
 								<tr>
-									<th>Data</th>
 									<th>Modelo</th>
 									<th>Fabricante</th>
 									<th>Quantidade</th>
 									<th>Preço Total</th>
 									<th>Preço Unitário</th>
+									<th>Data de compra</th>
+									<th>Prazo</th>
+									<th>Data de entrega</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -108,48 +110,22 @@
 								<?php if (isset($orders_list)) : ?>
 									<?php foreach ($orders_list as $order) : ?>
 										<tr>
-											<td><?= $order['date']; ?></td>
 											<td><?= $order['name_product']; ?></td>
 											<td><?= $order['name_maker']; ?></td>
 											<td><?= $order['quantity']; ?></td>
 											<td><?= $order['total_price']; ?></td>
 											<td><?= $order['unit_price']; ?></td>
+											<td><?= $order['purchase_date']; ?></td>
+											<td><?= $order['delivery_time']; ?></td>
+											<td><?= $order['delivery_date']; ?></td>
 										</tr>
-
-										<!-- MODAL MOVER PARA LIXEIRA PRODUTOS -->
-										<div class="modal fade" id="deleteProduct<?= $order['id_product']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
-											<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-													</div>
-													<form method="POST">
-														<div class="modal-body">
-															<div class="row">
-																<div class="col-md-12">
-
-																	<h3>ATENÇÃO</h3>
-																	<p class="text-muted fs-5">Ao deletar o <?= $products['name_product'] ?>, certifique-se que foram feita as devidas analises.</p>
-																</div>
-															</div>
-														</div>
-														<div class="modal-footer d-flex justify-content-end">
-															<input type="hidden" class="form-control" name="id_product" id="params_name" value="<?= $products['id_product']; ?>">
-															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-															<button type="submit" class="btn btn-danger">Mover para lixeria</button>
-														</div>
-													</form>
-												</div>
-											</div>
-										</div>
-										<!-- FIM MODAL MOVER PARA LIXEIRA PRODUTOS -->
-
 
 									<?php endforeach; ?>
 								<?php endif; ?>
 							</tbody>
 						</table>
 					</div>
+					
 				</div>
 			</div>
 		</div>

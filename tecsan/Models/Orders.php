@@ -11,21 +11,68 @@ Class Orders extends Model{
             return false;
         }
     }
-        public function addOrder($date,$name_product,$id_maker,$quantity,$unit_price,$total_price){
 
-		$sql = $this->db->prepare("INSERT INTO Orders SET id_product = :name, id_maker = :id_maker,quantity = :quantity, total_price = :total_price, unit_price = :unit_price, situation = '1'");
-        $sql->bindValue(":date", $date);
+    public function addOrder($name_product,$id_maker,$quantity,$unit_price,$total_price,$purchase_date, $delivery_time, $delivery_date)
+    {
+
+	    $sql = $this->db->prepare(
+            "INSERT INTO Orders SET 
+            id_product = :name,
+            id_makers = :id_maker, 
+            quantity = :quantity, 
+            total_price = :total_price, 
+            unit_price = :unit_price, 
+            purchase_date = :purchase_date, 
+            delivery_time = :delivery_time, 
+            delivery_date = :delivery_date, 
+            situation = '1'"
+        );
+        
         $sql->bindValue(":name", $name_product);
         $sql->bindValue(":id_maker", $id_maker);
         $sql->bindValue(":quantity", $quantity);
         $sql->bindValue(":total_price", $total_price);
         $sql->bindValue(":unit_price", $unit_price);
-        
+        $sql->bindValue(":purchase_date", $purchase_date);
+        $sql->bindValue(":delivery_time", $delivery_time);
+        $sql->bindValue(":delivery_date", $delivery_date);
+
+	    $sql->execute();
+
+	    return $this->db->lastInsertId();
+
+}
+
+    public function ordersConcluded(){
+        $data = array();
+		$sql = $this->db->prepare(
+            "SELECT
+                O.id_order,
+                O.delivery_date,
+                O.delivery_time,
+                O.purchase_date,
+                O.total_price,
+                O.unit_price,
+                O.quantity,
+                P.id_product,
+                P.id_maker,
+                P.name_product,
+                M.name_maker
+            FROM Orders AS O
+            INNER JOIN stock AS P
+                ON O.id_product = P.id_product
+            INNER JOIN makers AS M
+                ON M.id_makers = O.id_makers
+            WHERE P.situation = '0'"
+            );
 		$sql->execute();
 
-		return $this->db->lastInsertId();
-
+		if($sql->rowCount()>0){
+			$data = $sql->fetchAll(PDO::FETCH_ASSOC);
+		}
+		return $data;
     }
+
     
     public function getOrders(){
         $data = array();
@@ -46,7 +93,7 @@ Class Orders extends Model{
             INNER JOIN stock AS P
                 ON O.id_product = P.id_product
             INNER JOIN makers AS M
-                ON M.id_makers = P.id_maker
+                ON M.id_makers = O.id_makers
             WHERE P.situation = '1'"
             );
 		$sql->execute();

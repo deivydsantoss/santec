@@ -140,7 +140,7 @@
 													<div class="col-md-12 mb-3">
 														<div class="form-group">
 															<label for="params_name" class="form-label">Preço do Produto</label>
-															<input type="text" class="form-control" name="price" id="params_name" placeholder="Digite o preço do produto" required>
+															<input type="text" class="form-control" name="price" id="params_name" placeholder="R$ 0,00" required>
 														</div>
 													</div>
 													<div class="col-md-12">
@@ -203,7 +203,7 @@
 											</div>
 											<div class="modal-footer d-flex justify-content-end">
 												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-												<button type="button" class="btn btn-info">Adicionar Fabricante</button>
+												<button type="submit" name="maker" class="btn btn-info">Adicionar Fabricante</button>
 											</div>
 										</form>
 									</div>
@@ -213,8 +213,8 @@
 						</div>
 						<hr>
 					</div>
-					<div class="card-body">
 
+					<div class="card-body">
 						<table id="datatables-reponsive" class="table dataTable no-footer dtr-inline table-hover" style="width: 100%;" role="grid" aria-describedby="datatables-reponsive_info">
 							<thead>
 								<tr>

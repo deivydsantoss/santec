@@ -26,38 +26,29 @@
 							</div>
 							<div class="col-md-6 text-end">
 								<a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#addOrders">Novo Pedido</a>
-
-								<a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ordersPlaced">
-									<i class="text-light" data-feather="check-square"></i>
-								</a>
 							</div>
 
 							<!-- MODAL CRIAR PEDIDOS -->
-							<div class="modal fade" id="addOrders" tabindex="-1" role="dialog" aria-hidden="true"> 
+							<div class="modal fade" id="addOrders" tabindex="-1" role="dialog" aria-hidden="true">
 								<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
 											Adicionar Pedido
 											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
-										<form method="POST" action="<?= BASE_URL . 'Orders/createOrder' ?>">
+										<form method="POST" action="<?= BASE_URL . 'Orders/createOrders' ?>">
 											<div class="modal-body">
 												<div class="row">
-													<div class="col-md-12 mb-3">
-														<label for="params_description" class="form-label">Categoria do Produto</label>
-														<div>
-															<select class="form-select" aria-label="Default select example" name="id_category">
-																<option value="" disabled selected>Selecione a categoria</option>
-																<?php foreach ($category_list as $category) : ?>
-																	<option value="<?= $category['id_category']; ?>"><?= $category['name_category']; ?></option>
-																<?php endforeach; ?>
-															</select>
-														</div>
-													</div>
+
 													<div class="col-md-12 mb-3">
 														<div class="form-group">
 															<label for="params_name" class="form-label">Nome do Produto</label>
-															<input type="text" class="form-control" name="name" id="params_name" placeholder="Digite o nome do produto" required>
+															<select class="form-select" aria-label="Default select example" name="id_product">
+																<option value="" disabled selected>Selecione o fabricante</option>
+																	<?php foreach ($products_list as $products) : ?>
+																		<option value="<?= $products['id_product']; ?>"><?= $products['name_product']; ?></option>
+																	<?php endforeach; ?>
+															</select>
 														</div>
 													</div>
 													<div class="col-md-12 mb-3">
@@ -71,7 +62,6 @@
 															</select>
 														</div>
 													</div>
-
 													<div class="col-md-12 mb-3">
 														<div class="form-group">
 															<label for="params_name" class="form-label">Quantidade do Produto</label>
@@ -80,21 +70,34 @@
 													</div>
 													<div class="col-md-12 mb-3">
 														<div class="form-group">
-															<label for="params_name" class="form-label">Preço do Produto</label>
-															<input type="text" class="form-control" name="price" id="params_name" placeholder="Digite o preço do produto" required>
+															<label for="params_name" class="form-label">Preço Total</label>
+															<input type="text" class="form-control" name="total_price" id="params_name" placeholder="R$ 0,00" required>
+														</div>
+													</div>
+													<div class="col-md-12 mb-3">
+														<div class="form-group">
+															<label for="params_name" class="form-label">Preço Unitário do Produto</label>
+															<input type="text" class="form-control" name="unit_price" id="params_name" placeholder="R$ 0,00" required>
 														</div>
 													</div>
 													<div class="col-md-12">
 														<div class="form-group">
-															<label for="params_description" class="form-label">Descrição do Produto</label>
-															<input type="text" class="form-control" name="description" id="params_description" placeholder="Digite uma descrição para o produto" value="" required>
+															<label for="params_description" class="form-label">Data de compra</label>
+															<input type="date" class="form-control" name="purchase_date" id="params_description" placeholder="" value="" required>
 														</div>
 													</div>
+													<div class="col-md-12">
+														<div class="form-group">
+															<label for="params_description" class="form-label">Prazo</label>
+															<input type="date" class="form-control" name="delivery_time" id="params_description" placeholder="" value="" required>
+														</div>
+													</div>
+													
 												</div>
 											</div>
 											<div class="modal-footer d-flex justify-content-end">
 												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-												<button type="submit" name="newproduct" class="btn btn-info">Adicionar Pedido</button>
+												<button type="submit" name="neworder" class="btn btn-info">Adicionar Pedido</button>
 											</div>
 										</form>
 									</div>
@@ -110,15 +113,14 @@
 						<table id="datatables-reponsive" class="table dataTable no-footer dtr-inline table-hover" style="width: 100%;" role="grid" aria-describedby="datatables-reponsive_info">
 							<thead>
 								<tr>
-									<th>Compra</th>
-									<th>Prazo</th>
-									<th>Entregua</th>
 									<th>Modelo</th>
 									<th>Fabricante</th>
 									<th>Quantidade</th>
 									<th>Preço Total</th>
 									<th>Preço Unitário</th>
-									<th>Realizado</th>
+									<th>Data de compra</th>
+									<th>Prazo</th>
+									<th>Data de entrega</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -126,23 +128,14 @@
 								<?php if (isset($orders_list)) : ?>
 									<?php foreach ($orders_list as $order) : ?>
 										<tr>
-											<td><?= $order['purchase_date']; ?></td>
-											<td><?= $order['delivery_time']; ?></td>
-											<td><?= $order['delivery_date']; ?></td>
 											<td><?= $order['name_product']; ?></td>
 											<td><?= $order['name_maker']; ?></td>
 											<td><?= $order['quantity']; ?></td>
-											<td><?= $order['total_price']; ?></td>
-											<td><?= $order['unit_price']; ?></td>
-											<td class="table-action align-content-center" width="75">
-												<div class="d-flex">
-													<a data-bs-toggle="modal" data-bs-target="#deleteOrder<?= $order['id_order']; ?>" class="me-2">
-														<i class="text-success" data-feather="check-square"></i>
-													</a>
-													
-												</div>
-											</td>
-
+											<td>R$ <?= number_format($order['total_price'], 2, ',','.'); ?></td>
+											<td>R$ <?= number_format($order['unit_price'], 2, ',','.'); ?></td>
+											<td><?= date('d/m/Y',strtotime($order['purchase_date'])); ?></td>
+											<td><?= date('d/m/Y',strtotime($order['delivery_time'])); ?></td>
+											<td><?= date('d/m/Y',strtotime($order['delivery_date'])); ?></td>
 										</tr>
 
 									<?php endforeach; ?>

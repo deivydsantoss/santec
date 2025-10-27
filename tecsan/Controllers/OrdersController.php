@@ -29,6 +29,8 @@ Class OrdersController extends Controller {
             $stock = new Stock(); // Model responsável pelo banco de dados
             $category = new Category(); // Model responsável pelo banco de dados
             $orders = new Orders(); // Model responsável pelo banco de dados
+            $maker = new Maker(); // Model responsável pelo banco de dados
+            
 
             // Mensagens de sucesso
             if (!empty($success)) {
@@ -43,18 +45,22 @@ Class OrdersController extends Controller {
 
             //  Adicionar novo Pedido
             if (isset($_REQUEST['neworder'])) {
-                $date = date($_POST['date']);
+                
                 $name_product = addslashes(trim($_POST['name_product']));
                 $id_maker = addslashes(trim($_POST['id_maker']));
                 $quantity = intval($_POST['quantity']);
                 $total_price = floatval($_POST['total_price']);
                 $unit_price = floatval($_POST['unit_price']);
-                
+                $purchase_date = date($_POST['purchase_date']);
+                $delivery_time = date($_POST['delivery_time']);
+                $delivery_date = date('');
+
+
                 if ($quantity < 0 || $total_price < 0) {
                     $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
                 } else {
                     
-                    $stock->addProduct($date,$name_product,$id_maker,$quantity,$unit_price,$total_price);
+                    $stock->addProduct($name_product,$id_maker,$quantity,$unit_price,$total_price ,$purchase_date, $delivery_time, $delivery_date);
                 }
 
                 redirect('Stock');
@@ -112,12 +118,18 @@ Class OrdersController extends Controller {
                 $stock->deleteProduct($delete);
             }
 
+            // Listar Fabricantes
+            $this->data['makers_list'] = $maker->getMaker();
+
+            // Listar Products
+            $this->data['products_list'] = $stock->getList();
 
             //  Listar pedidos
             $this->data['orders_list'] = $orders->getOrders();
 
             // Scripts e visual
             $this->data['JS'] = '
+                <script src="' . BASE_URL . 'Assets/js/mask.js"></script>
                 <script src="' . BASE_URL . 'Assets/js/datatables.js"></script>
                 <script>
                     document.addEventListener("DOMContentLoaded", function() {
@@ -132,11 +144,45 @@ Class OrdersController extends Controller {
         }
     }
 
+    public function createOrders()
+    {
+        $orders = new Orders();
+
+        //  Adicionar novo Pedido
+        if (isset($_REQUEST['neworder'])) {
+
+            $name_product = addslashes(trim($_POST['id_product']));
+            $id_maker = addslashes(trim($_POST['id_maker']));
+            $quantity = intval($_POST['quantity']);
+            $tprice_mask = $_POST['total_price'];
+            $uprice_mask = $_POST['unit_price'];
+            $purchase_date = date($_POST['purchase_date']);
+            $delivery_time = date($_POST['delivery_time']);
+            $delivery_date = date('0000-00-00');
+
+            $total_price = str_replace(",", ".", $tprice_mask);
+            $total_price = str_replace("R$ ", "", $total_price);
+
+            $unit_price = str_replace(",", ".", $uprice_mask);
+            $unit_price = str_replace("R$ ", "", $unit_price);
+            // var_dump($unit_price);
+            // exit;
+
+            if ($quantity < 0 || $total_price < 0) {
+                $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
+            } else {
+                    
+                $orders->addOrder($name_product,$id_maker,$quantity,$unit_price,$total_price ,$purchase_date, $delivery_time, $delivery_date);
+            }
+                redirect('Orders');
+            }
+    }
+
     public function ordersConcluded()
     {
         $orders = new Orders(); // Model responsável pelo banco de dados
 
-        $this->data['orders_list'] = $orders->getOrders();
+        $this->data['orders_list'] = $orders->ordersConcluded();
 
             // Scripts e visual
             $this->data['JS'] = '

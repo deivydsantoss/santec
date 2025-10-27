@@ -41,7 +41,6 @@ Class StockController extends Controller {
                 }
             }
 
-
             //  Editar o produto
             if (isset($_POST['edit'])) {
                 $id_product = intval($_POST['id_product']);
@@ -63,8 +62,7 @@ Class StockController extends Controller {
                     redirect('Stock');
                 }
 
-            }
-            
+            }          
 
             //  Adicionar nova categoria
             if (!empty($_POST['category'])) {
@@ -72,6 +70,16 @@ Class StockController extends Controller {
                 $id_category = addslashes(trim($_POST['category']));
               
                 $category->addCategory( $id_category);
+                redirect('Stock');
+            }
+
+            
+            //  Adicionar novo fabricante
+            if (!empty($_POST['id_makers'])) {
+                $name_maker = addslashes(trim($_POST['id_makers']));
+                
+                $maker->addMaker($name_maker);
+
                 redirect('Stock');
             }
 
@@ -108,6 +116,7 @@ Class StockController extends Controller {
 
             // Scripts e visual
             $this->data['JS'] = '
+                <script src="' . BASE_URL . 'Assets/js/mask.js"></script>
                 <script src="' . BASE_URL . 'Assets/js/datatables.js"></script>
                 <script>
                     document.addEventListener("DOMContentLoaded", function() {
@@ -128,6 +137,7 @@ Class StockController extends Controller {
 
         //  Adicionar novo produto
         if (isset($_REQUEST['newproduct'])) {
+            
             $name_product = addslashes(trim($_POST['name']));
             $description = addslashes(trim($_POST['description']));
             $id_category = addslashes(trim($_POST['id_category']));

@@ -14,7 +14,7 @@ Class Maker extends Model{
     }
 
     public function addMaker($name_maker){
-        $sql = $this->db->prepare("INSERT INTO makers SET  name_maker = :name_maker, situation = '1'");
+        $sql = $this->db->prepare("INSERT INTO makers SET  name_maker = :name_maker");
 		$sql->bindValue(":name_maker", $name_maker);
 		$sql->execute();
 
