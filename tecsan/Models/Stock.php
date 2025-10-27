@@ -4,8 +4,7 @@ Class Stock extends Model{
 
     private $permissions;
 
-    public function hasPermission($name)
-    {
+    public function hasPermission($name){
         if (in_array($name, $this->permissions)) {
             return true;
         } else {
@@ -14,10 +13,11 @@ Class Stock extends Model{
     }
     
 
-    public function addProduct($name_product, $description, $id_category,$quantity,$price){
+    public function addProduct($name_product, $description, $id_category, $quantity, $price, $id_maker){
 
-		$sql = $this->db->prepare("INSERT INTO products SET name_product = :name, description = :description, id_category = :id_category, price = :price, quantity = :quantity, situation = '1'");
+		$sql = $this->db->prepare("INSERT INTO stock SET name_product = :name, description = :description, id_maker = :id_maker, id_category = :id_category, price = :price, quantity = :quantity, situation = '1'");
         $sql->bindValue(":name", $name_product);
+        $sql->bindValue(":id_maker", $id_maker);
 		$sql->bindValue(":description", $description);
 		$sql->bindValue(":id_category", $id_category);
         $sql->bindValue(":price", $price);
@@ -28,14 +28,16 @@ Class Stock extends Model{
 
     }
 
-    public function editProduct($name_product, $description,$quantity,$price,$id_category){
+    public function editProduct($name_product, $description,$quantity,$price,$id_category, $id_makers,$id_product){
         
-        $sql = $this->db->prepare("UPDATE products SET name_product = :name_product, description = :description, id_category = :id_category, price = :price, quantity = :quantity WHERE id_product = :id_product");
+        $sql = $this->db->prepare("UPDATE stock SET name_product = :name_product, description = :description, id_maker = :id_makers, id_category = :id_category, price = :price, quantity = :quantity WHERE id_product = :id_product");
         $sql->bindValue(":name_product", $name_product);
 		$sql->bindValue(":description", $description);
         $sql->bindValue(":price", $price);
         $sql->bindValue(":quantity", $quantity);
         $sql->bindValue(":id_category", $id_category);
+        $sql->bindValue(":id_makers", $id_makers);
+        $sql->bindValue(":id_product", $id_product);
 
 
         if ($sql->execute()) {
@@ -45,38 +47,48 @@ Class Stock extends Model{
         }
     }
 
+    public function restoreProduct($id_product){
+        $sql = $this->db->prepare("UPDATE stock SET situation = '1' WHERE id_product = :id_product");
+        $sql->bindValue(":id_product", $id_product);
+        $sql->execute();
+    }
+
     public function MoveToTrashProduct($id_product){
-        $sql = $this->db->prepare("UPDATE products SET situation = '0' WHERE id_product = :id_product");
+        $sql = $this->db->prepare("UPDATE stock SET situation = '0' WHERE id_product = :id_product");
         $sql->bindValue(":id_product", $id_product);
         $sql->execute();
     }
 
     public function RemoveToTrashProduct($id_product){
-        $sql = $this->db->prepare("UPDATE products SET situation = '1' WHERE id_product = :id_product");
+        $sql = $this->db->prepare("UPDATE stock SET situation = '1' WHERE id_product = :id_product");
         $sql->bindValue(":id_product", $id_product);
         $sql->execute();
     }
 
     public function deleteProduct($delete){
-        $sql = $this->db->prepare("DELETE FROM products WHERE id_product = :delete");
+        $sql = $this->db->prepare("DELETE FROM stock WHERE id_product = :delete");
         $sql->bindValue(":delete", $delete);
         $sql->execute();
     }
-
 
     public function getList(){
         $data = array();
 		$sql = $this->db->prepare(
             "SELECT
                 P.id_product,
+                P.id_category,
+                P.id_maker,
                 P.name_product,
                 P.description,
                 P.price,
                 P.quantity,
-                C.name_category
-            FROM products AS P
+                C.name_category,
+                M.name_maker
+            FROM stock AS P
             INNER JOIN category AS C
                 ON C.id_category = P.id_category
+            INNER JOIN makers AS M
+                ON M.id_makers = P.id_maker
             WHERE P.situation = '1'"
             );
 		$sql->execute();
@@ -96,10 +108,13 @@ Class Stock extends Model{
                 P.description,
                 P.price,
                 P.quantity,
-                C.name_category
-            FROM products AS P
+                C.name_category,
+                M.name_maker
+            FROM stock AS P
             INNER JOIN category AS C
                 ON C.id_category = P.id_category
+            INNER JOIN makers AS M
+                ON M.id_makers = P.id_maker
             WHERE P.situation = '0'"
             );
 		$sql->execute();

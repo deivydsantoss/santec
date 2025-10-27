@@ -1,5 +1,8 @@
 <?php 
 session_start();
+ini_set('display_errors', 1);
+error_reporting();
+
 
 spl_autoload_register(function($class){
 	if(file_exists('Controllers/'.$class.'.php')){
