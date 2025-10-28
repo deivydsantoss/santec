@@ -45,9 +45,9 @@
 															<label for="params_name" class="form-label">Nome do Produto</label>
 															<select class="form-select" aria-label="Default select example" name="id_product">
 																<option value="" disabled selected>Selecione o fabricante</option>
-																	<?php foreach ($products_list as $products) : ?>
-																		<option value="<?= $products['id_product']; ?>"><?= $products['name_product']; ?></option>
-																	<?php endforeach; ?>
+																<?php foreach ($products_list as $products) : ?>
+																	<option value="<?= $products['id_product']; ?>"><?= $products['name_product']; ?></option>
+																<?php endforeach; ?>
 															</select>
 														</div>
 													</div>
@@ -92,7 +92,7 @@
 															<input type="date" class="form-control" name="delivery_time" id="params_description" placeholder="" value="" required>
 														</div>
 													</div>
-													
+
 												</div>
 											</div>
 											<div class="modal-footer d-flex justify-content-end">
@@ -121,6 +121,7 @@
 									<th>Data de compra</th>
 									<th>Prazo</th>
 									<th>Data de entrega</th>
+									<th>Ações</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -131,11 +132,50 @@
 											<td><?= $order['name_product']; ?></td>
 											<td><?= $order['name_maker']; ?></td>
 											<td><?= $order['quantity']; ?></td>
-											<td>R$ <?= number_format($order['total_price'], 2, ',','.'); ?></td>
-											<td>R$ <?= number_format($order['unit_price'], 2, ',','.'); ?></td>
-											<td><?= date('d/m/Y',strtotime($order['purchase_date'])); ?></td>
-											<td><?= date('d/m/Y',strtotime($order['delivery_time'])); ?></td>
-											<td><?= date('d/m/Y',strtotime($order['delivery_date'])); ?></td>
+											<td>R$ <?= number_format($order['total_price'], 2, ',', '.'); ?></td>
+											<td>R$ <?= number_format($order['unit_price'], 2, ',', '.'); ?></td>
+											<td><?= date('d/m/Y', strtotime($order['purchase_date'])); ?></td>
+											<td><?= date('d/m/Y', strtotime($order['delivery_time'])); ?></td>
+											<td><?= date('d/m/Y', strtotime($order['delivery_date'])); ?></td>
+											<td class="table-action align-content-center" width="75">
+												<div class="">
+													<button type="button" class="btn " data-bs-toggle="dropdown" aria-expanded="false">
+														<i class="text-black" data-feather="more-vertical"></i>
+													</button>
+
+													<ul class="dropdown-menu">
+														<li>
+															<div class="row g-0 align-content-center">
+																<div class="col-2">
+																	<a data-bs-toggle="modal" data-bs-target="#editOrders<?= $order['id_order']; ?>" class="dropdown-item ">
+																		<i class="text-black" data-feather="edit"></i>
+																	</a>
+																</div>
+
+																<div>
+																	<p class="col-10">Editar Pedido</p>
+																</div>
+															</div>
+														</li>
+														<li>
+															<a data-bs-toggle="modal" data-bs-target="#deleteOrders<?= $order['id_order']; ?>" class="dropdown-item ">
+																<i class="text-black" data-feather="check-square"></i>
+															</a>
+															<p class="">Confirmar Pedido</p>
+														</li>
+														<li>
+															<hr class="dropdown-divider">
+														</li>
+														<li>
+															<a data-bs-toggle="modal" data-bs-target="#deleteOrders<?= $order['id_order']; ?>" class="dropdown-item ">
+																<i class="text-black" data-feather="trash-2"></i>
+															</a>
+															<p class="">Deletar Pedido</p>
+														</li>
+													</ul>
+												</div>
+
+											</td>
 										</tr>
 
 									<?php endforeach; ?>

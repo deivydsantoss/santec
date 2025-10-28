@@ -63,7 +63,7 @@
 																<td><?= $products['name_product']; ?></td>
 																<td><?= $products['name_maker']; ?></td>
 																<td><?= $products['quantity']; ?></td>
-																<td><?= $products['price']; ?></td>
+																<td>R$ <?= number_format($products['price'], 2, ',', '.'); ?></td>
 																<td><?= $products['description']; ?></td>
 																<td class="table-action" width="75">
 																	<form method="POST">
@@ -102,25 +102,46 @@
 										<form method="POST" action="<?= BASE_URL . 'Stock/createProduct' ?>">
 											<div class="modal-body">
 												<div class="row">
+
 													<div class="col-md-12 mb-3">
 														<label for="params_description" class="form-label">Categoria do Produto</label>
+
+
+														<a class="btn btn-sm bg-danger float-end ms-2" data-bs-toggle="modal">
+															<i class="text-light" data-feather="minus"></i>
+														</a>
+														<a class="btn btn-sm bg-info float-end" data-bs-toggle="modal" data-bs-target="#addMaker">
+															<i class="text-light" data-feather="plus"></i>
+														</a>
+
 														<div>
 															<select class="form-select" aria-label="Default select example" name="id_category">
 																<option value="" disabled selected>Selecione a categoria</option>
 																<?php foreach ($category_list as $category) : ?>
 																	<option value="<?= $category['id_category']; ?>"><?= $category['name_category']; ?></option>
 																<?php endforeach; ?>
+
 															</select>
 														</div>
 													</div>
+
 													<div class="col-md-12 mb-3">
 														<div class="form-group">
 															<label for="params_name" class="form-label">Nome do Produto</label>
 															<input type="text" class="form-control" name="name" id="params_name" placeholder="Digite o nome do produto" required>
 														</div>
 													</div>
+
 													<div class="col-md-12 mb-3">
 														<label for="params_description" class="form-label">Fabricante do Produto</label>
+
+
+														<a class="btn btn-sm bg-danger float-end ms-2" data-bs-toggle="modal">
+															<i class="text-light" data-feather="minus"></i>
+														</a>
+														<a class="btn btn-sm bg-info float-end" data-bs-toggle="modal" data-bs-target="#addMaker">
+															<i class="text-light" data-feather="plus"></i>
+														</a>
 														<div>
 															<select class="form-select" aria-label="Default select example" name="id_maker">
 																<option value="" disabled selected>Selecione o fabricante</option>
@@ -244,7 +265,7 @@
 											<td><?= $products['name_product']; ?></td>
 											<td><?= $products['name_maker']; ?></td>
 											<td><?= $products['quantity']; ?></td>
-											<td><?= $products['price']; ?></td>
+											<td>R$ <?= number_format($products['price'], 2, ',', '.'); ?></td>
 											<td><?= $products['description']; ?></td>
 											<td class="table-action align-content-center" width="75">
 												<div class="d-flex ">
@@ -307,13 +328,13 @@
 																<div class="col-md-12 mb-3">
 																	<div class="form-group">
 																		<label for="params_name" class="form-label">Preço do Produto</label>
-																		<input type="text" class="form-control" name="price" id="params_name" value="<?= $products['price']; ?>" required>
+																		<input type="text" class="form-control" name="price" id="params_name" value="R$ <?= number_format($products['price'], 2, ',', '.'); ?>" required>
 																	</div>
 																</div>
 																<div class="col-md-12">
 																	<div class="form-group">
 																		<label for="params_description" class="form-label">Descrição do Produto</label>
-																		<input type="text" class="form-control" name="description" id="params_description" value="<?= $products['description']; ?>" value="" required>
+																		<input type="text" class="form-control" name="description" id="params_description" value="<?= $products['description']; ?>" required>
 																	</div>
 																</div>
 															</div>

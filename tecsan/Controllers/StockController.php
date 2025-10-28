@@ -49,9 +49,10 @@ Class StockController extends Controller {
                 $id_category = addslashes(trim($_POST['id_category']));
                 $id_makers = addslashes(trim($_POST['id_makers']));
                 $quantity = intval($_POST['quantity']);
-                $price = floatval($_POST['price']);
+                $price_mask = ($_POST['price']);
                 
-            
+                $price = str_replace(",", ".", $price_mask);
+                $price = str_replace("R$ ", "", $price);
                 
                 if ($quantity < 0 || $price < 0) {
                     $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
@@ -143,7 +144,10 @@ Class StockController extends Controller {
             $id_category = addslashes(trim($_POST['id_category']));
             $id_maker = addslashes(trim($_POST['id_maker']));
             $quantity = intval($_POST['quantity']);
-            $price = floatval($_POST['price']);
+            $price_mask = ($_POST['price']);
+
+            $price = str_replace(",", ".", $price_mask);
+            $price = str_replace("R$ ", "", $price);
                 
             if ($quantity < 0 || $price < 0) {
                     $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
