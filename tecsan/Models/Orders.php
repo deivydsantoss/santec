@@ -12,7 +12,7 @@ Class Orders extends Model{
         }
     }
 
-    public function addOrder($name_product,$id_maker,$quantity,$unit_price,$total_price,$purchase_date, $delivery_time, $delivery_date)
+    public function addOrder($name_product,$id_maker,$quantity,$unit_price,$total_price, $delivery_time, $delivery_date)
     {
 
 	    $sql = $this->db->prepare(
@@ -22,7 +22,6 @@ Class Orders extends Model{
             quantity = :quantity, 
             total_price = :total_price, 
             unit_price = :unit_price, 
-            purchase_date = :purchase_date, 
             delivery_time = :delivery_time, 
             delivery_date = :delivery_date, 
             situation = '1'"
@@ -33,7 +32,37 @@ Class Orders extends Model{
         $sql->bindValue(":quantity", $quantity);
         $sql->bindValue(":total_price", $total_price);
         $sql->bindValue(":unit_price", $unit_price);
-        $sql->bindValue(":purchase_date", $purchase_date);
+
+        $sql->bindValue(":delivery_time", $delivery_time);
+        $sql->bindValue(":delivery_date", $delivery_date);
+
+	    $sql->execute();
+
+	    return $this->db->lastInsertId();
+
+    }
+
+    public function editOrder($id_order, $name_product, $id_maker, $quantity, $total_price, $unit_price, $delivery_time, $delivery_date)
+    {
+
+	    $sql = $this->db->prepare(
+            "UPDATE Orders SET 
+            id_product = :name,
+            id_makers = :id_maker, 
+            quantity = :quantity, 
+            total_price = :total_price, 
+            unit_price = :unit_price, 
+            delivery_time = :delivery_time, 
+            delivery_date = :delivery_date 
+            WHERE id_order = :id_order" 
+        );
+        
+        $sql->bindValue(":id_order", $id_order);
+        $sql->bindValue(":name", $name_product);
+        $sql->bindValue(":id_maker", $id_maker);
+        $sql->bindValue(":quantity", $quantity);
+        $sql->bindValue(":total_price", $total_price);
+        $sql->bindValue(":unit_price", $unit_price);
         $sql->bindValue(":delivery_time", $delivery_time);
         $sql->bindValue(":delivery_date", $delivery_date);
 
@@ -72,7 +101,6 @@ Class Orders extends Model{
 		}
 		return $data;
     }
-
     
     public function getOrders(){
         $data = array();

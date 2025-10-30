@@ -43,54 +43,6 @@ Class OrdersController extends Controller {
                 }
             }
 
-            //  Adicionar novo Pedido
-            if (isset($_REQUEST['neworder'])) {
-                
-                $name_product = addslashes(trim($_POST['name_product']));
-                $id_maker = addslashes(trim($_POST['id_maker']));
-                $quantity = intval($_POST['quantity']);
-                $total_price = floatval($_POST['total_price']);
-                $unit_price = floatval($_POST['unit_price']);
-                $purchase_date = date($_POST['purchase_date']);
-                $delivery_time = date($_POST['delivery_time']);
-                $delivery_date = date('');
-
-
-                if ($quantity < 0 || $total_price < 0) {
-                    $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
-                } else {
-                    
-                    $stock->addProduct($name_product,$id_maker,$quantity,$unit_price,$total_price ,$purchase_date, $delivery_time, $delivery_date);
-                }
-
-                redirect('Stock');
-
-            }
-
-            //  Editar o produto
-            if (isset($_POST['edit'])) {
-                $id_product = intval($_POST['id_product']);
-                $name_product = addslashes(trim($_POST['name']));
-                $description = addslashes(trim($_POST['description']));
-                $id_category = addslashes(trim($_POST['id_category']));
-                $id_makers = addslashes(trim($_POST['id_makers']));
-                $quantity = intval($_POST['quantity']);
-                $price = floatval($_POST['price']);
-                
-            
-                
-                if ($quantity < 0 || $price < 0) {
-                    $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
-                } else {
-                    // var_dump($_POST);
-                    // exit;
-                    $stock->editProduct($name_product, $description,$quantity,$price,$id_category, $id_makers,$id_product);
-                    redirect('Stock');
-                }
-
-            }
-            
-
             //  Adicionar nova categoria
             if (!empty($_POST['category'])) {
 
@@ -156,7 +108,7 @@ Class OrdersController extends Controller {
             $quantity = intval($_POST['quantity']);
             $tprice_mask = $_POST['total_price'];
             $uprice_mask = $_POST['unit_price'];
-            $purchase_date = date($_POST['purchase_date']);
+
             $delivery_time = date($_POST['delivery_time']);
             $delivery_date = date('0000-00-00');
 
@@ -172,7 +124,41 @@ Class OrdersController extends Controller {
                 $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
             } else {
                     
-                $orders->addOrder($name_product,$id_maker,$quantity,$unit_price,$total_price ,$purchase_date, $delivery_time, $delivery_date);
+                $orders->addOrder($name_product,$id_maker,$quantity,$unit_price,$total_price , $delivery_time, $delivery_date);
+            }
+                redirect('Orders');
+            }
+    }
+
+    public function editOrders()
+    {
+        $orders = new Orders();
+
+        //  Editar Pedido
+        if (isset($_POST['editar'])) {
+
+            $id_order = intval($_POST['id_order']);
+            $name_product = addslashes(trim($_POST['id_product']));
+            $id_maker = addslashes(trim($_POST['id_maker']));
+            $quantity = intval($_POST['quantity']);
+            $tprice_mask = $_POST['total_price'];
+            $uprice_mask = $_POST['unit_price'];
+            $delivery_time = date($_POST['delivery_time']);
+            $delivery_date = date('0000-00-00');
+
+            $total_price = str_replace(",", ".", $tprice_mask);
+            $total_price = str_replace("R$ ", "", $total_price);
+
+            $unit_price = str_replace(",", ".", $uprice_mask);
+            $unit_price = str_replace("R$ ", "", $unit_price);
+            // var_dump($_POST);
+            // exit;
+
+            if ($quantity < 0 || $total_price < 0) {
+                $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
+            } else {
+                    
+                $orders->editOrder($id_order, $name_product, $id_maker, $quantity, $total_price, $unit_price, $delivery_time, $delivery_date);
             }
                 redirect('Orders');
             }
