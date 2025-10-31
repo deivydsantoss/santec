@@ -1,26 +1,31 @@
-<?php 
+<?php
 
-class HomeController extends Controller{
+class HomeController extends Controller
+{
 
 
-    private $data = array();
+	private $data = array();
 
-	public function __construct(){
+	public function __construct()
+	{
 		$user = new Users();
 		if (!$user->isLogged()) {
-			header('Location: '.BASE_URL.'Login');
+			header('Location: ' . BASE_URL . 'Login');
 			exit;
-		}else{
+		} else {
 			$user->setLoggedUser();
 			$this->data["name"] = $user->getName();
 		}
 	}
 
 
-    public function index(){
+	public function index()
+	{
 
 		$this->data['nivel-1'] = 'Dashboard';
 
-        $this->loadTemplateAdmin('Admin/blank', $this->data);
-    }
+		$this->loadTemplateAdmin('Admin/blank', $this->data);
+
+		
+	}
 }

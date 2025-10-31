@@ -108,15 +108,12 @@
 						<table id="datatables-reponsive" class="table dataTable no-footer dtr-inline table-hover" style="width: 100%;" role="grid" aria-describedby="datatables-reponsive_info">
 							<thead>
 								<tr>
-									<th>ID</th>
-									<th>Modelo</th>
-									<th>Fabricante</th>
-									<th>Quantidade</th>
-									<th>Preço Total</th>
-									<th>Preço Unitário</th>
+									<th>Cliente</th>
+									<th>Status</th>
+									<th>Preço da Compra</th>
+									<th>Endereço</th>
 									<th>Data de compra</th>
 									<th>Prazo</th>
-									<th>Data de entrega</th>
 									<th>Ações</th>
 								</tr>
 							</thead>
@@ -125,24 +122,21 @@
 								<?php if (isset($orders_list)) : ?>
 									<?php foreach ($orders_list as $order) : ?>
 										<tr>
-											<td><?= $order['id_order']; ?></td>
-											<td><?= $order['name_product']; ?></td>
-											<td><?= $order['name_maker']; ?></td>
-											<td><?= $order['quantity']; ?></td>
+											<td><?= $order['id_client']; ?></td>
+											<td><?= $order['situation']; ?></td>
 											<td>R$ <?= number_format($order['total_price'], 2, ',', '.'); ?></td>
-											<td>R$ <?= number_format($order['unit_price'], 2, ',', '.'); ?></td>
+											<td><?= $order['id_address']; ?></td>
 											<td><?= date('d/m/Y', strtotime($order['purchase_date'])); ?></td>
-											<td><?= date('d/m/Y', strtotime($order['delivery_time'])); ?></td>
-											<td><?= date('d/m/Y', strtotime($order['delivery_date'])); ?></td>
+											<td>5 dias</td>
 											<td class="table-action align-content-center" width="75">
 												<div class="">
 													<button type="button" class="btn " data-bs-toggle="dropdown" aria-expanded="false">
-														<i class="text-black" data-feather="more-vertical"></i>
+														<i class="text-black" data-feather="settings"></i>
 													</button>
 
 													<ul class="dropdown-menu">
 														<li class="ps-4">
-															<a class="d-flex align-content-center text-decoration-none" data-bs-toggle="modal" data-bs-target="#editOrders<?= $order['id_order']; ?>" class="dropdown-item ">
+															<a class="d-flex align-content-center text-decoration-none" data-bs-toggle="modal" data-bs-target="#editOrders<?= $order['id_order']; ?>" class="dropdown-item">
 																<i class="text-black " data-feather="edit"></i>
 																<p class="ms-2">Editar</p>
 															</a>

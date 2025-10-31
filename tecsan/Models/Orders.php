@@ -106,23 +106,12 @@ Class Orders extends Model{
         $data = array();
 		$sql = $this->db->prepare(
             "SELECT
-                O.id_order,
-                O.delivery_date,
-                O.delivery_time,
-                O.purchase_date,
-                O.total_price,
-                O.unit_price,
-                O.quantity,
-                P.id_product,
-                P.id_maker,
-                P.name_product,
-                M.name_maker
-            FROM Orders AS O
-            INNER JOIN stock AS P
-                ON O.id_product = P.id_product
-            INNER JOIN makers AS M
-                ON M.id_makers = O.id_makers
-            WHERE P.situation = '1'"
+                id_order,
+                purchase_date,
+                delivery_date,
+                total_price
+            FROM
+                Orders"
             );
 		$sql->execute();
 
