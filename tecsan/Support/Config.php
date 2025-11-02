@@ -29,7 +29,7 @@ if(ENVIRONMENT == 'development'){
 	/**
 	 * PROJECT TEMPLATE
 	 */
-	define("TEMPLATE", "default");
+	define("TEMPLATE", "site");
 	define("TEMPLATE_ADMIN", "admin");
 
 	/**

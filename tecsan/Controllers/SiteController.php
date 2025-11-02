@@ -6,7 +6,6 @@ class SiteController extends Controller{
     private $data = array();
 
 	public function __construct(){
-		// construct of class
 	}
 
     public function index(){

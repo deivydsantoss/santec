@@ -11,23 +11,68 @@ Class Orders extends Model{
             return false;
         }
     }
-        public function addOrder($date,$name_product,$id_maker,$quantity,$unit_price,$total_price){
 
-		$sql = $this->db->prepare("INSERT INTO Orders SET id_product = :name, id_maker = :id_maker,quantity = :quantity, total_price = :total_price, unit_price = :unit_price, situation = '1'");
-        $sql->bindValue(":date", $date);
+    public function addOrder($name_product,$id_maker,$quantity,$unit_price,$total_price, $delivery_time, $delivery_date)
+    {
+
+	    $sql = $this->db->prepare(
+            "INSERT INTO Orders SET 
+            id_product = :name,
+            id_makers = :id_maker, 
+            quantity = :quantity, 
+            total_price = :total_price, 
+            unit_price = :unit_price, 
+            delivery_time = :delivery_time, 
+            delivery_date = :delivery_date, 
+            situation = '1'"
+        );
+        
         $sql->bindValue(":name", $name_product);
         $sql->bindValue(":id_maker", $id_maker);
         $sql->bindValue(":quantity", $quantity);
         $sql->bindValue(":total_price", $total_price);
         $sql->bindValue(":unit_price", $unit_price);
-        
-		$sql->execute();
 
-		return $this->db->lastInsertId();
+        $sql->bindValue(":delivery_time", $delivery_time);
+        $sql->bindValue(":delivery_date", $delivery_date);
+
+	    $sql->execute();
+
+	    return $this->db->lastInsertId();
 
     }
-    
-    public function getOrders(){
+
+    public function editOrder($id_order, $name_product, $id_maker, $quantity, $total_price, $unit_price, $delivery_time, $delivery_date)
+    {
+
+	    $sql = $this->db->prepare(
+            "UPDATE Orders SET 
+            id_product = :name,
+            id_makers = :id_maker, 
+            quantity = :quantity, 
+            total_price = :total_price, 
+            unit_price = :unit_price, 
+            delivery_time = :delivery_time, 
+            delivery_date = :delivery_date 
+            WHERE id_order = :id_order" 
+        );
+        
+        $sql->bindValue(":id_order", $id_order);
+        $sql->bindValue(":name", $name_product);
+        $sql->bindValue(":id_maker", $id_maker);
+        $sql->bindValue(":quantity", $quantity);
+        $sql->bindValue(":total_price", $total_price);
+        $sql->bindValue(":unit_price", $unit_price);
+        $sql->bindValue(":delivery_time", $delivery_time);
+        $sql->bindValue(":delivery_date", $delivery_date);
+
+	    $sql->execute();
+
+	    return $this->db->lastInsertId();
+
+}
+
+    public function ordersConcluded(){
         $data = array();
 		$sql = $this->db->prepare(
             "SELECT
@@ -46,8 +91,27 @@ Class Orders extends Model{
             INNER JOIN stock AS P
                 ON O.id_product = P.id_product
             INNER JOIN makers AS M
-                ON M.id_makers = P.id_maker
-            WHERE P.situation = '1'"
+                ON M.id_makers = O.id_makers
+            WHERE P.situation = '0'"
+            );
+		$sql->execute();
+
+		if($sql->rowCount()>0){
+			$data = $sql->fetchAll(PDO::FETCH_ASSOC);
+		}
+		return $data;
+    }
+    
+    public function getOrders(){
+        $data = array();
+		$sql = $this->db->prepare(
+            "SELECT
+                id_order,
+                purchase_date,
+                delivery_date,
+                total_price
+            FROM
+                Orders"
             );
 		$sql->execute();
 

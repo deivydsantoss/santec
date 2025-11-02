@@ -27,7 +27,7 @@ Class Stock extends Model{
 		return $this->db->lastInsertId();
 
     }
-
+    
     public function editProduct($name_product, $description,$quantity,$price,$id_category, $id_makers,$id_product){
         
         $sql = $this->db->prepare("UPDATE stock SET name_product = :name_product, description = :description, id_maker = :id_makers, id_category = :id_category, price = :price, quantity = :quantity WHERE id_product = :id_product");
