@@ -9,7 +9,11 @@
     <title>Deftec Store</title>
 
     <link href="<?= BASE_URL; ?>Assets/css/app.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?= BASE_URL;?>Assets/css/site.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Solitreo&display=swap" rel="stylesheet">
 
     <!-- FAVICON -->
     <link rel="shortcut icon" href="<?= BASE_URL; ?>Assets/img/favicon.png" />
@@ -23,6 +27,7 @@
             position: relative;
             margin: auto;
         }
+
     </style>
 
 </head>
@@ -36,16 +41,14 @@
                 <div class="container">
                     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-                            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-                                <use xlink:href="#bootstrap"></use>
-                            </svg>
+                            <p class="h1 text-light me-3">DefTec</p>
                         </a>
 
                         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                            <li><a href="#" class="nav-link text-white px-2 link-dark">Home</a></li>
-                            <li><a href="#" class="nav-link text-white px-2 link-dark">Products</a></li>
-                            <li><a href="#" class="nav-link text-white px-2 link-dark">Contact</a></li>
-                            <li><a href="#" class="nav-link text-white px-2 link-dark">About</a></li>
+                            <li><a href="#" class="nav-link text-white px-2 link-dark">Inicio</a></li>
+                            <li><a href="#" class="nav-link text-white px-2 link-dark">Produtos</a></li>
+                            <li><a href="#" class="nav-link text-white px-2 link-dark">Contatos</a></li>
+                            <li><a href="#" class="nav-link text-white px-2 link-dark">Sobre</a></li>
                         </ul>
 
                         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -68,27 +71,17 @@
                         </div>
                     </div>
                 </div>
-            </header >
-            <div class="nav-scroller shadow-sm" >
-                <nav class="nav nav-underline align-content-center pb-3" aria-label="Secondary navigation">
-                    <?php 
-                    ?>
-                    <a class="nav-link btn text-muted fw-bold ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" style="background-color: #e2e1e1ff;" href="#">Componentes PC</a>
-                    <a class="nav-link btn text-muted fw-bold ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" style="background-color: #e2e1e1ff;" href="#">Escritorio</a>
-                    <a class="nav-link btn text-muted fw-bold ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" style="background-color: #e2e1e1ff;" href="#">Papelaria</a>
-                    <a class="nav-link btn text-muted fw-bold ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" style="background-color: #e2e1e1ff;" href="#">Smartphones</a>
-                    <a class="nav-link btn text-muted fw-bold ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" style="background-color: #e2e1e1ff;" href="#">Notebook</a>
-                </nav>
-            </div>
+            </header>
+
             <?php $this->loadViewInTemplate($viewName, $viewData); ?>
 
 
             <footer class="footer">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="row text-muted">
                         <div class="col-6 text-start">
                             <p class="mb-0">
-                                <a href="index.html" class="text-muted"><strong>AdminKit Demo</strong></a> &copy; Murilo Morais
+                                <a href="index.html" class="text-muted"><strong>AdminKit Demo</strong></a> &copy; Deivyd Santos
                             </p>
                         </div>
                         <div class="col-6 text-end">
