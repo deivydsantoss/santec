@@ -52,9 +52,9 @@
                             <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
                         </form>
 
-                        <div class="dropdown text-end">
-                            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <div class="dropdown text-end ">
+                            <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="" alt="user" width="32" height="32" class="rounded-circle">
                             </a>
                             <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
                                 <li><a class="dropdown-item" href="#">New project...</a></li>
@@ -68,14 +68,16 @@
                         </div>
                     </div>
                 </div>
-            </header>
-            <div class="nav-scroller bg-body shadow-sm">
+            </header >
+            <div class="nav-scroller shadow-sm" >
                 <nav class="nav nav-underline align-content-center pb-3" aria-label="Secondary navigation">
-                    <a class="nav-link btn btn-outline-secondary text-light bg-secondary ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" aria-current="page" href="#">Componentes PC</a>
-                    <a class="nav-link btn btn-outline-secondary text-light bg-secondary ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" href="#">Escritorio</a>
-                    <a class="nav-link btn btn-outline-secondary text-light bg-secondary ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" href="#">Papelaria</a>
-                    <a class="nav-link btn btn-outline-secondary text-light bg-secondary ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" href="#">Smartphones</a>
-                    <a class="nav-link btn btn-outline-secondary text-light bg-secondary ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" href="#">Notebook</a>
+                    <?php 
+                    ?>
+                    <a class="nav-link btn text-muted fw-bold ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" style="background-color: #e2e1e1ff;" href="#">Componentes PC</a>
+                    <a class="nav-link btn text-muted fw-bold ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" style="background-color: #e2e1e1ff;" href="#">Escritorio</a>
+                    <a class="nav-link btn text-muted fw-bold ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" style="background-color: #e2e1e1ff;" href="#">Papelaria</a>
+                    <a class="nav-link btn text-muted fw-bold ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" style="background-color: #e2e1e1ff;" href="#">Smartphones</a>
+                    <a class="nav-link btn text-muted fw-bold ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" style="background-color: #e2e1e1ff;" href="#">Notebook</a>
                 </nav>
             </div>
             <?php $this->loadViewInTemplate($viewName, $viewData); ?>

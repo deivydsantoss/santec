@@ -4,9 +4,12 @@
         <div class="py-5">
             <h1 class="display-5 fw-bold text-white">Dark mode hero</h1>
             <div class="col-lg-6 mx-auto">
-                <p class="fs-5 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+                <p class="fs-5 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the
+                    world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive
+                    grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom button</button>
+                    <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom
+                        button</button>
                     <button type="button" class="btn btn-outline-light btn-lg px-4">Secondary</button>
                 </div>
             </div>
@@ -99,7 +102,9 @@
             </div>
             <div class="col-lg-6">
                 <h1 class="display-5 fw-bold lh-1 mb-3">Responsive left-aligned hero with image</h1>
-                <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+                <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s
+                    most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid
+                    system, extensive prebuilt components, and powerful JavaScript plugins.</p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                     <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
                     <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
@@ -108,5 +113,38 @@
         </div>
     </div>
 
+    <div class="container-xxl bg-primary my-6 py-5 wow fadeInUp" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+        <div class="container">
+            <div class="owl-carousel client-carousel owl-loaded owl-drag">
+                <div class="owl-stage-outer">
+                    <div class="owl-stage" style="transform: translate3d(-2462px, 0px, 0px); transition: 1s; width: 3694px;">
+                        <div class="owl-item cloned" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-4.png" alt=""></a></div>
+                        <div class="owl-item cloned" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-5.png" alt=""></a></div>
+                        <div class="owl-item cloned" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-6.png" alt=""></a></div>
+                        <div class="owl-item cloned" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-7.png" alt=""></a></div>
+                        <div class="owl-item cloned" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-8.png" alt=""></a></div>
+                        <div class="owl-item" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-1.png" alt=""></a></div>
+                        <div class="owl-item" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-2.png" alt=""></a></div>
+                        <div class="owl-item" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-3.png" alt=""></a></div>
+                        <div class="owl-item" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-4.png" alt=""></a></div>
+                        <div class="owl-item" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-5.png" alt=""></a></div>
+                        <div class="owl-item" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-6.png" alt=""></a></div>
+                        <div class="owl-item" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-7.png" alt=""></a></div>
+                        <div class="owl-item active" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-8.png" alt=""></a></div>
+                        <div class="owl-item cloned active" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-1.png" alt=""></a></div>
+                        <div class="owl-item cloned active" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-2.png" alt=""></a></div>
+                        <div class="owl-item cloned active" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-3.png" alt=""></a></div>
+                        <div class="owl-item cloned active" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-4.png" alt=""></a></div>
+                        <div class="owl-item cloned" style="width: 115.2px; margin-right: 90px;"><a href="#"><img class="img-fluid" src="img/logo-5.png" alt=""></a></div>
+                    </div>
+                </div>
+                <div class="owl-nav disabled">
+                    <div class="owl-prev">prev</div>
+                    <div class="owl-next">next</div>
+                </div>
+                <div class="owl-dots disabled"></div>
+            </div>
+        </div>
+    </div>
 
 </main>
