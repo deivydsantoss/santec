@@ -37,7 +37,7 @@
     <div class="wrapper">
 
         <div class="main">
-            <header class="p-3 mb-3 bg-dark border-bottom">
+            <header class="p-3 bg-dark border-bottom">
                 <div class="container">
                     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
@@ -46,7 +46,7 @@
 
                         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                             <li><a href="#" class="nav-link text-white px-2 link-dark">Inicio</a></li>
-                            <li><a href="#" class="nav-link text-white px-2 link-dark">Produtos</a></li>
+                            <li><a href="<?= BASE_URL; ?>Store/index" class="nav-link text-white px-2 link-dark">Produtos</a></li>
                             <li><a href="#" class="nav-link text-white px-2 link-dark">Contatos</a></li>
                             <li><a href="#" class="nav-link text-white px-2 link-dark">Sobre</a></li>
                         </ul>

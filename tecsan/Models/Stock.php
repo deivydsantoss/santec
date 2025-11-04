@@ -13,7 +13,7 @@ Class Stock extends Model{
     }
     
 
-    public function addProduct($name_product, $description, $id_category, $quantity, $price, $id_maker){
+    public function addProduct($name_product, $description, $id_category, $quantity, $price, $id_maker, $path){
 
 		$sql = $this->db->prepare("INSERT INTO stock SET name_product = :name, description = :description, id_maker = :id_maker, id_category = :id_category, price = :price, quantity = :quantity, situation = '1'");
         $sql->bindValue(":name", $name_product);
@@ -22,6 +22,8 @@ Class Stock extends Model{
 		$sql->bindValue(":id_category", $id_category);
         $sql->bindValue(":price", $price);
         $sql->bindValue(":quantity", $quantity);
+        $sql->bindValue(":path", $path);
+
 		$sql->execute();
 
 		return $this->db->lastInsertId();

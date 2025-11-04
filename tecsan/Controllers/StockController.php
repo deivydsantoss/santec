@@ -148,12 +148,35 @@ Class StockController extends Controller {
 
             $price = str_replace(",", ".", $price_mask);
             $price = str_replace("R$ ", "", $price);
+
+            var_dump($_FILES);
+            exit;
+
+            if (isset($_FILES['img'])){
+
+                $img = $_FILES['img'];
+                $upload = "Uploads/";
+                $nome_arquivo = $img['name'];
+                $novo_nome = uniqid();
+                $extension = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION));
+
+                if($extension != "jpg" && $extension != "png"){
+                    die("Tipo de arquivo não aceito!");
+                }
+
+                
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$upload . $novo_nome . "." . $extension)){
+                    $path = $upload . $novo_nome . "." . $extension;
+                } else{
+                    null;
+                }
+            }
                 
             if ($quantity < 0 || $price < 0) {
                     $this->data['Erro'] = message()->warning('Valores negativos não são permitidos.');
             } else {
                     
-                $stock->addProduct($name_product, $description, $id_category, $quantity, $price, $id_maker);
+                $stock->addProduct($name_product, $description, $id_category, $quantity, $price, $id_maker, $path);
             }
 
             redirect('Stock');

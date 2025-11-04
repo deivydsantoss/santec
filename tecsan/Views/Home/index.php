@@ -1,29 +1,36 @@
-<div class="nav-scroller shadow-sm">
-    <nav class="nav nav-underline align-content-center pb-3" aria-label="Secondary navigation">
 
-        <?php foreach ($category_list as $category) : ?>
-            <a class="nav-link btn text-muted fw-bold ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" style="background-color: #e2e1e1ff;" href="#"><?= $category['name_category']; ?></a>
-        <?php endforeach; ?>
-
-
-    </nav>
-</div>
 <main>
 
-    <!-- Heroe Start -->
+    <!-- Heroe 1 Start -->
+    <div class="container my-5">
+        <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+            <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+                <h1 class="display-4 fw-bold lh-1">Tecnologia em boas mãos</h1>
+                <p class="lead">Assistência técnica especializada e loja de informática completa.
+                    Oferecemos reparos precisos, upgrades personalizados e os melhores componentes do mercado.
+                    Da manutenção à montagem de PCs, tudo com qualidade e garantia DefTec.</p>
+            </div>
+            <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+                <img class="rounded-lg-3" src="<?= BASE_URL; ?>Assets/img/carousel-bg-1.jpg" alt="" width="720">
+            </div>
+        </div>
+    </div>
+    <!-- Heroe 1 End -->
+
+    <!-- Heroe 2 Start -->
     <div class="bg-dark text-secondary px-4 py-5 text-center">
         <div class="py-5">
             <h1 class="display-5 fw-bold text-white">Tecnologia que mantém o seu mundo em movimento.</h1>
             <div class="col-lg-6 mx-auto">
                 <p class="fs-5 mb-4">Somos especialistas em manutenção, montagem e upgrade de computadores, notebooks e periféricos. Oferecemos também os melhores produtos de informática, com garantia e suporte técnico de quem entende.</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Solicitar Orçamento</button>
+                    <button type="button" class="btn btn-outline-primary btn-lg px-4 me-sm-3 fw-bold">Solicitar Orçamento</button>
                     <button type="button" class="btn btn-outline-light btn-lg px-4">Ver Produtos</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Heroe End -->
+    <!-- Heroe 2 End -->
 
     <!-- Grid Start -->
     <div class="container px-4 py-5" id="icon-grid">
@@ -92,24 +99,20 @@
     </div>
     <!-- Grid End -->
 
-    <!-- Products Start -->
-    
-    <!-- Products End -->
-
     <!-- Section Start -->
     <div class="container col-xxl-8 px-4 py-5">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div class="col-10 col-sm-8 col-lg-6">
-                <img src="" class="d-block mx-lg-auto img-fluid" alt="" width="700" height="500" loading="lazy">
+                <img src="<?= BASE_URL; ?>Assets/img/carousel-bg-2.jpg" class="d-block mx-lg-auto img-fluid" alt="" width="700" height="500" loading="lazy">
             </div>
             <div class="col-lg-6">
-                <h1 class="display-5 fw-bold lh-1 mb-3">Responsive left-aligned hero with image</h1>
-                <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s
-                    most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid
-                    system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+                <h1 class="display-5 fw-bold lh-1 mb-3">Soluções Técnicas e Produtos de Alta Performance</h1>
+                <p class="lead">Especialistas em manutenção, montagem e venda de equipamentos de informática.
+                    Aqui, cada detalhe é pensado para oferecer desempenho, segurança e confiança.
+                    Do reparo à entrega — tudo com a qualidade que o seu computador merece.</p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Conheça nossos serviços</button>
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Ver produtos</button>
                 </div>
             </div>
         </div>
@@ -144,27 +147,29 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-white mb-4">Quick Links</h5>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Our Services</a>
+                    <a class="btn btn-link" href="">Sobre Nós</a>
+                    <a class="btn btn-link" href="">Produtos</a>
+                    <a class="btn btn-link" href="">Serviços</a>
+                    <a class="btn btn-link" href="">Contatos</a>
                     <a class="btn btn-link" href="">Terms &amp; Condition</a>
                     <a class="btn btn-link" href="">Support</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Business Hours</h5>
-                    <p class="mb-1">Monday - Friday</p>
-                    <h6 class="text-light">09:00 am - 07:00 pm</h6>
-                    <p class="mb-1">Saturday</p>
-                    <h6 class="text-light">09:00 am - 12:00 pm</h6>
-                    <p class="mb-1">Sunday</p>
-                    <h6 class="text-light">Closed</h6>
+                    <h5 class="text-white mb-4">Horario de funcionamento</h5>
+                    <p class="mb-1">Segunda - Sexta</p>
+                    <h6 class="text-light">09:00 - 20:00 </h6>
+                    <p class="mb-1">Sabado</p>
+                    <h6 class="text-light">08:00 - 12:00</h6>
+                    <p class="mb-1">Domingo</p>
+                    <h6 class="text-light">Fechado</h6>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Newsletter</h5>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <h5 class="text-white mb-4">Sobre a DefTec</h5>
+                    <p>A DefTec é especializada em assistência técnica, montagem e venda de artigos de informática.
+                        Nosso compromisso é unir tecnologia e confiança para oferecer o melhor em desempenho digital.</p>
                     <div class="position-relative w-100">
                         <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-secondary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        <a href="<?=BASE_URL.'Login';?>" class="btn btn-secondary py-2 position-absolute top-0 end-0 mt-2 me-2">Entrar como adm</a>
                     </div>
                 </div>
             </div>
