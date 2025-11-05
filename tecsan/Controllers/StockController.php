@@ -132,6 +132,7 @@ Class StockController extends Controller {
         }
     }
 
+
     public function createProduct()
     {
         $stock = new Stock();
@@ -149,8 +150,6 @@ Class StockController extends Controller {
             $price = str_replace(",", ".", $price_mask);
             $price = str_replace("R$ ", "", $price);
 
-            var_dump($_FILES);
-            exit;
 
             if (isset($_FILES['img'])){
 
@@ -165,7 +164,7 @@ Class StockController extends Controller {
                 }
 
                 
-                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$upload . $novo_nome . "." . $extension)){
+                if (move_uploaded_file($_FILES['img']["tmp_name"],$upload . $novo_nome . "." . $extension)){
                     $path = $upload . $novo_nome . "." . $extension;
                 } else{
                     null;

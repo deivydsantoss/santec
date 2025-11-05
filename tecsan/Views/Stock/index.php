@@ -240,6 +240,7 @@
 						<table id="datatables-reponsive" class="table dataTable no-footer dtr-inline table-hover" style="width: 100%;" role="grid" aria-describedby="datatables-reponsive_info">
 							<thead>
 								<tr>
+									<th>Preview</th>
 									<th>Categoría
 										<a class="badge badge-circle rounded-circle bg-info ms-2" data-bs-toggle="modal" data-bs-target="#addCategory">
 											<i class="text-light" data-feather="plus"></i>
@@ -262,6 +263,7 @@
 								<?php if (isset($products_list)) : ?>
 									<?php foreach ($products_list as $products) : ?>
 										<tr>
+											<td><img height="50" src="<?= BASE_URL . $products['path'];?>"></td>
 											<td><?= $products['name_category']; ?></td>
 											<td><?= $products['name_product']; ?></td>
 											<td><?= $products['name_maker']; ?></td>
