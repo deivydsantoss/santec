@@ -168,4 +168,18 @@ class Stock extends Model
         }
         return $data;
     }
+
+    public function selectForId($id_product){
+        $data = array();
+        $sql = $this->db->prepare(
+            "SELECT * FROM stock WHERE id_product = :id_product"
+        );
+        $sql->bindValue(":id_product", $id_product);
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            $data = $sql->fetch(PDO::FETCH_ASSOC);
+        }
+        return $data;
+    }
 }

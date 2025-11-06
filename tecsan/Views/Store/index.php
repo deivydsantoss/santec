@@ -4,7 +4,7 @@
         <?php foreach ($category_list as $category) : ?>
             <a class="nav-link btn text-muted fw-bold ms-3 p-1 ps-2 pe-2 rounded-pill shadow-sm" name="id_category" href="<?= BASE_URL . 'Store/index/' . $category['id_category']; ?>" style="background-color: #e2e1e1ff;"><?= $category['name_category']; ?></a>
         <?php endforeach; ?>
-        
+
     </nav>
 </div>
 
@@ -12,22 +12,48 @@
     <div class="card-body">
         <div class="row">
             <?php foreach ($products_list as $products) : ?>
-                <div class="card ms-2 mb-1 rounded-3 col-2 shadow-sm border-primary">
-                    <div class="card-header py-3 text-white d-flex align-items-center justify-content-center border-primary">
-                        <img height="70%" src="<?= BASE_URL . $products['path']; ?>">
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title"><?= $products['name_product']; ?></h1>
-                        <h1 class="card-title pricing-card-title">R$ <?= number_format($products['price'], 2, ',', '.'); ?></h1>
-                        <p>
-                            <td><?= $products['description']; ?></td>
-                        </p>
-                        <button type="button" class="w-100 btn btn-lg btn-primary">Comprar</button>
-                    </div>
+                <div class="col-2">
+                    <form method="POST" action="<?= BASE_URL; ?>Store/addCarrinho">
+                        <div class="card ms-2 mb-1 rounded-3 shadow-sm border-primary">
+                            <div class="card-header py-3 text-white d-flex align-items-center justify-content-center border-primary">
+                                <img height="100" src="<?= BASE_URL . $products['path']; ?>">
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title"><?= $products['name_product']; ?></h1>
+                                <h1 class="card-title pricing-card-title">R$ <?= number_format($products['price'], 2, ',', '.'); ?></h1>
+                                <p>
+                                    <td><?= $products['description']; ?></td>
+                                </p>
+                                <button type="submit" class="w-100 btn btn-lg btn-primary">Comprar</button>
+                            </div>
+                        </div>
+                        <input type="hidden" class="form-control" name="id_product" value="<?= $products['id_product']; ?>">
+                    </form>
                 </div>
             <?php endforeach; ?>
         </div>
     </div>
 
+
+
+    <div class="offcanvas offcanvas-start shadow-lg" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Carrinho</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="list-group mb-3">
+                <?php foreach($cart_product as $item): ?>
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0"><?= $item['name']; ?></h6>
+                            <small class="text-muted"><?= $item['description']; ?></small>
+                        </div>
+                        <span class="text-muted">R$ <?= number_format($item['price'], 2, ',', '.'); ?></span>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
 
 </main>
