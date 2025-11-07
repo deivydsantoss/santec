@@ -1,4 +1,3 @@
-
 <main>
 
     <!-- Heroe 1 Start -->
@@ -169,7 +168,7 @@
                         Nosso compromisso é unir tecnologia e confiança para oferecer o melhor em desempenho digital.</p>
                     <div class="position-relative w-100">
                         <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <a href="<?=BASE_URL.'Login';?>" class="btn btn-secondary py-2 position-absolute top-0 end-0 mt-2 me-2">Entrar como adm</a>
+                        <a href="<?= BASE_URL . 'Login'; ?>" class="btn btn-secondary py-2 position-absolute top-0 end-0 mt-2 me-2">Entrar como adm</a>
                     </div>
                 </div>
             </div>
@@ -178,3 +177,40 @@
     <!-- Footer End -->
 
 </main>
+
+<div class="offcanvas offcanvas-start shadow-lg" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasScrollingLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Carrinho</h5>
+
+
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="list-group mb-3">
+            <?php if (!empty($_SESSION['carrinho'])): ?>
+
+                <?php foreach ($cart_product as $item): ?>
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0"><?= $item['name']; ?></h6>
+                            <small class="text-muted"><?= $item['description']; ?></small>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                            <span class="text-black ">R$ <?= number_format($item['price'], 2, ',', '.'); ?></span>
+                            <strong class="text-muted " disabled><?= $item['quantity']; ?></strong>
+                        </div>
+
+                        <div class="">
+                            <form method="POST" action="<?= BASE_URL; ?>Store/removeCarrinho">
+                                <button type="submit" name="removeCart" class="w-100 btn btn-sm btn-danger ">Remover</button>
+                                <input type="hidden" class="form-control" name="id_product" value="<?= $item['id']; ?>">
+                            </form>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+
+            <?php else: ?>
+                <p class="text-muted">O carrinho está vazio.</p>
+            <?php endif; ?>
+        </ul>
+    </div>

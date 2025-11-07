@@ -35,14 +35,14 @@
                     <span class="align-middle">Administrativo</span>
                 </a>
                 <ul class="sidebar-nav">
-                    <!--  -->
-                    <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Dashboard") ? 'active' : ''; ?>">
+                    <!-- Dashboard Desactive -->
+                    <!-- <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Dashboard") ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="<?= BASE_URL . 'Home'; ?>">
                             <i class="" data-feather="pie-chart"></i>
                             <span class="align-middle">DashBoard</span>
                         </a>
-                    </li>
-                    <!--  -->
+                    </li> -->
+                    
 
             
                     <!-- Stock -->
