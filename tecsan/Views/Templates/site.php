@@ -45,15 +45,14 @@
                         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                             <li><a href="<?= BASE_URL; ?>Site" class="nav-link text-white px-2 link-dark">Inicio</a></li>
                             <li><a href="<?= BASE_URL; ?>Store" class="nav-link text-white px-2 link-dark">Produtos</a></li>
-                            <li><a href="<?= BASE_URL; ?>Store/index" class="nav-link text-white px-2 link-dark">Contatos</a></li>
-                            <li><a href="<?= BASE_URL; ?>Store/index" class="nav-link text-white px-2 link-dark">Sobre</a></li>
+                            <li><a href="<?= BASE_URL; ?>Service" class="nav-link text-white px-2 link-dark">Serviços</a></li>
                         </ul>
 
                         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
                             <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
                         </form>
 
-                        <button class="btn btn-primary me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                        <button class="btn btn-primary me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasScrolling">
                             <i class="text-white" data-feather="shopping-cart"></i>
                         </button>
 
@@ -78,33 +77,6 @@
             <?php $this->loadViewInTemplate($viewName, $viewData); ?>
 
 
-            <footer class="footer">
-                <div class="container">
-                    <div class="row text-muted">
-                        <div class="col-6 text-start">
-                            <p class="mb-0">
-                                <a href="index.html" class="text-muted"><strong>AdminKit Demo</strong></a> &copy; Deivyd Santos
-                            </p>
-                        </div>
-                        <div class="col-6 text-end">
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="#">Support</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="#">Help Center</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="#">Privacy</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="#">Terms</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
         </div>
     </div>
     <script src="<?= BASE_URL; ?>Assets/js/jquery-3.5.1.js"></script>

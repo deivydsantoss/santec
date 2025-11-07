@@ -25,7 +25,7 @@
                 <p class="fs-5 mb-4">Somos especialistas em manutenção, montagem e upgrade de computadores, notebooks e periféricos. Oferecemos também os melhores produtos de informática, com garantia e suporte técnico de quem entende.</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                     <button type="button" class="btn btn-outline-primary btn-lg px-4 me-sm-3 fw-bold">Solicitar Orçamento</button>
-                    <button type="button" class="btn btn-outline-light btn-lg px-4">Ver Produtos</button>
+                    <a href="<?= BASE_URL; ?>Store" type="button" class="btn btn-outline-light btn-lg px-4">Ver Produtos</a>
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@
                     Do reparo à entrega — tudo com a qualidade que o seu computador merece.</p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                     <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Conheça nossos serviços</button>
-                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Ver produtos</button>
+                    <a href="<?= BASE_URL; ?>Store" type="button" class="btn btn-outline-secondary btn-lg px-4">Ver produtos</a>
                 </div>
             </div>
         </div>

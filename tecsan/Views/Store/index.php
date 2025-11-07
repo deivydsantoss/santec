@@ -24,7 +24,7 @@
                                 <p>
                                     <td><?= $products['description']; ?></td>
                                 </p>
-                                <button type="submit" class="w-100 btn btn-lg btn-primary">Comprar</button>
+                                <button type="submit" name="addCart" class="w-100 btn btn-lg btn-primary">Adicionar ao Carrinho</button>
                             </div>
                         </div>
                         <input type="hidden" class="form-control" name="id_product" value="<?= $products['id_product']; ?>">
@@ -35,24 +35,66 @@
     </div>
 
 
+    <?php if (isset($_GET['cart']) && $_GET['cart'] === 'open'): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasCart'));
+                offcanvas.show();
+            });
+        </script>
+    <?php endif; ?>
 
-    <div class="offcanvas offcanvas-start shadow-lg" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+
+    <div class="offcanvas offcanvas-start shadow-lg" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasScrollingLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Carrinho</h5>
+
+
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <ul class="list-group mb-3">
-                <?php foreach($cart_product as $item): ?>
-                    <li class="list-group-item d-flex justify-content-between lh-sm">
-                        <div>
-                            <h6 class="my-0"><?= $item['name']; ?></h6>
-                            <small class="text-muted"><?= $item['description']; ?></small>
-                        </div>
-                        <span class="text-muted">R$ <?= number_format($item['price'], 2, ',', '.'); ?></span>
-                    </li>
-                <?php endforeach; ?>
+                <?php if (!empty($_SESSION['carrinho'])): ?>
+
+                    <?php foreach ($cart_product as $item): ?>
+                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0"><?= $item['name']; ?></h6>
+                                <small class="text-muted"><?= $item['description']; ?></small>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                <span class="text-black ">R$ <?= number_format($item['price'], 2, ',', '.'); ?></span>
+                                <strong class="text-muted " disabled><?= $item['quantity']; ?></strong>
+                            </div>
+
+                            <div class="">
+                                <form method="POST" action="<?= BASE_URL; ?>Store/removeCarrinho">
+                                    <button type="submit" name="removeCart" class="w-100 btn btn-sm btn-danger ">Remover</button>
+                                    <input type="hidden" class="form-control" name="id_product" value="<?= $item['id']; ?>">
+                                </form>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+
+                <?php else: ?>
+                    <p class="text-muted">O carrinho está vazio.</p>
+                <?php endif; ?>
             </ul>
+        </div>
+
+        <div class="p-3 d-flex justify-content-between">
+            <form method="POST" action="<?= BASE_URL; ?>Store/limpar">
+                <button type="submit" class="btn btn-danger btn-sm">Limpar carrinho</button>
+            </form>
+
+            <li class="list-group-item d-flex justify-content-between">
+                <span class="fw-bold">Total</span>
+                <strong>R$ <?= number_format($cart_total, 2, ',', '.'); ?></strong>
+            </li>
+
+            <form method="POST" action="<?= BASE_URL; ?>Store/">
+                <button type="submit" class="btn btn-success btn-sm float-end">Compra</button>
+            </form>
         </div>
     </div>
 
