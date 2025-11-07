@@ -9,11 +9,10 @@
     <title>Deftec Store</title>
 
     <link href="<?= BASE_URL; ?>Assets/css/app.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?= BASE_URL;?>Assets/css/site.css">
+    <link rel="stylesheet" href="<?= BASE_URL; ?>Assets/css/site.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Solitreo&display=swap" rel="stylesheet">
+
 
     <!-- FAVICON -->
     <link rel="shortcut icon" href="<?= BASE_URL; ?>Assets/img/favicon.png" />
@@ -27,7 +26,6 @@
             position: relative;
             margin: auto;
         }
-
     </style>
 
 </head>
@@ -55,7 +53,11 @@
                             <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
                         </form>
 
-                        <div class="dropdown text-end ">
+                        <button class="btn btn-primary me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                            <i class="text-white" data-feather="shopping-cart"></i>
+                        </button>
+
+                        <div class="dropdown text-end">
                             <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="" alt="user" width="32" height="32" class="rounded-circle">
                             </a>
