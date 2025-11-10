@@ -108,30 +108,30 @@ class StoreController extends Controller
 
         $removed = false;
 
-        // 1) Tenta localizar por itens onde 'id' é igual ao id_product
+        
         foreach ($_SESSION['carrinho'] as $key => $item) {
-            // normaliza comparações
+            
             $itemId = isset($item['id']) ? (int)$item['id'] : (int)$key;
 
             if ($itemId === $id_product) {
-                // se pediu para remover tudo -> unset
+                
                 if ($removeAll) {
                     unset($_SESSION['carrinho'][$key]);
                 } else {
-                    // se existe quantity > 1 -> decrementa
+                    
                     if (isset($item['quantity']) && (int)$item['quantity'] > 1) {
                         $_SESSION['carrinho'][$key]['quantity'] = (int)$item['quantity'] - 1;
                     } else {
-                        // quantity = 1 ou não existe -> remove o item
+                        
                         unset($_SESSION['carrinho'][$key]);
                     }
                 }
                 $removed = true;
-                break; // se quiser remover todas as entradas com mesmo id, retire o break
+                break; 
             }
         }
 
-        // 2) Caso não tenha encontrado no loop acima, talvez o carrinho esteja indexado por id (ex.: $_SESSION['carrinho'][$id] = [...])
+        
         if (!$removed && isset($_SESSION['carrinho'][$id_product])) {
             $item = $_SESSION['carrinho'][$id_product];
 
@@ -147,7 +147,7 @@ class StoreController extends Controller
             $removed = true;
         }
 
-        // 3) Reindexa apenas se o array estiver usando índices numéricos sequenciais (0..n)
+        
         if ($removed && is_array($_SESSION['carrinho'])) {
             $keys = array_keys($_SESSION['carrinho']);
             $sequential = ($keys === range(0, count($_SESSION['carrinho']) - 1));
@@ -177,4 +177,7 @@ class StoreController extends Controller
         header('Location: ' . BASE_URL . 'Store/index?cart=open');
         exit;
     }
+
+
+
 }

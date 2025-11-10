@@ -92,9 +92,9 @@
                 <strong>R$ <?= number_format($cart_total, 2, ',', '.'); ?></strong>
             </li>
 
-            <form method="POST" action="<?= BASE_URL; ?>Store/">
-                <button type="submit" class="btn btn-success btn-sm float-end">Compra</button>
-            </form>
+
+            <a href="<?= BASE_URL; ?>Purchase/index" type="submit" class="btn btn-success btn-sm float-end">Compra</a>
+
         </div>
     </div>
 
