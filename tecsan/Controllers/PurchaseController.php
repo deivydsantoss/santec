@@ -40,4 +40,41 @@ class PurchaseController extends Controller
 
         $this->loadTemplateSite('Purchase/index', $this->data);
     }
+
+    public function finish(){
+
+        $cart_product = $_SESSION['carrinho'] ?? [];
+        $this->data['cart_product'] = $cart_product;
+
+
+        $client = new Client();
+
+        $address = new Address();
+
+        // echo'<pre>';
+        // var_dump($_SESSION['carrinho']);
+        // echo '<br>';
+        // echo'<pre>';
+        // var_dump($_POST);
+        // exit;
+
+        if (isset($_REQUEST['purchase'])) {
+            
+            $first_name = addslashes(trim($_POST['firstName']));
+            $last_name = addslashes( (trim($_POST['lastName'])));
+            $username = addslashes(trim($_POST['username']));
+            $email = addslashes(trim($_POST['email']));
+
+            $client->addClient($first_name,$last_name, $username, $email);
+
+            $road = addslashes(trim($_POST['road']));
+            $complement = addslashes(trim($_POST['complement']));
+
+            $address->addAddress($road,$complement);
+
+            // redirect('Stock');
+
+        }
+
+    }
 }

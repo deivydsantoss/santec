@@ -80,7 +80,7 @@
                         <font dir="auto" style="vertical-align: inherit;">Adicione seus dados</font>
                     </font>
                 </h4>
-                <form method="POST" action="" class="needs-validation" novalidate="">
+                <form method="POST" action="<?= BASE_URL; ?>Purchase/finish"  >
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <label for="firstName" class="form-label">
@@ -88,7 +88,7 @@
                                     <font dir="auto" style="vertical-align: inherit;">Primeiro nome</font>
                                 </font>
                             </label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                            <input type="text" class="form-control" name="firstName" placeholder="" value="" required="">
                             <div class="invalid-feedback">
                                 <font dir="auto" style="vertical-align: inherit;">
                                     <font dir="auto" style="vertical-align: inherit;">
@@ -104,7 +104,7 @@
                                     <font dir="auto" style="vertical-align: inherit;">Sobrenome</font>
                                 </font>
                             </label>
-                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+                            <input type="text" class="form-control" name="lastName" placeholder="" value="" required="">
                             <div class="invalid-feedback">
                                 <font dir="auto" style="vertical-align: inherit;">
                                     <font dir="auto" style="vertical-align: inherit;">
@@ -115,7 +115,7 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="username" class="form-label">
+                            <label for="username" id="username" name="username" class="form-label">
                                 <font dir="auto" style="vertical-align: inherit;">
                                     <font dir="auto" style="vertical-align: inherit;">nome de usuário</font>
                                 </font>
@@ -126,7 +126,7 @@
                                         <font dir="auto" style="vertical-align: inherit;">@</font>
                                     </font>
                                 </span>
-                                <input type="text" class="form-control" id="username" placeholder="nome de usuário" required="">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="nome de usuário" required="">
                                 <div class="invalid-feedback">
                                     <font dir="auto" style="vertical-align: inherit;">
                                         <font dir="auto" style="vertical-align: inherit;">
@@ -138,7 +138,7 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="email" class="form-label">
+                            <label for="email" id="email"  class="form-label">
                                 <font dir="auto" style="vertical-align: inherit;">
                                     <font dir="auto" style="vertical-align: inherit;">E-mail </font>
                                 </font><span class="text-muted">
@@ -147,7 +147,7 @@
                                     </font>
                                 </span>
                             </label>
-                            <input type="email" class="form-control" id="email" placeholder="você@exemplo.com">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="você@exemplo.com">
                             <div class="invalid-feedback">
                                 <font dir="auto" style="vertical-align: inherit;">
                                     <font dir="auto" style="vertical-align: inherit;">
@@ -164,7 +164,7 @@
                                         <font dir="auto" style="vertical-align: inherit;">Endereço</font>
                                     </font>
                                 </label>
-                                <input type="text" class="form-control" id="address" placeholder="Rua João, 123" required="">
+                                <input type="text" class="form-control" id="address" name="road" placeholder="Rua João, 123" required="">
                                 <div class="invalid-feedback">
                                     <font dir="auto" style="vertical-align: inherit;">
                                         <font dir="auto" style="vertical-align: inherit;">
@@ -183,7 +183,7 @@
                                         </font>
                                     </span>
                                 </label>
-                                <input type="text" class="form-control" id="address2" placeholder="Apartamento 24">
+                                <input type="text" class="form-control" id="address2" name="complement" placeholder="Apartamento 24">
                             </div>
                         </div>
 
@@ -321,9 +321,9 @@
 
                     <hr class="my-4">
 
-                    <button class="w-100 btn btn-primary btn-lg" type="submit">
+                    <button class="w-100 btn btn-primary btn-lg" name="purchase" type="submit">
                         <font dir="auto" style="vertical-align: inherit;">
-                            <font dir="auto" style="vertical-align: inherit;">Continue pagando</font>
+                            <font dir="auto" style="vertical-align: inherit;">Confirmar compra</font>
                         </font>
                     </button>
                 </form>

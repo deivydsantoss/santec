@@ -28,7 +28,6 @@ $(document).ready(function () {
 
         if (value == 'credit') {
             $("#credit-fields").removeClass("d-none");
-            $input.attr("required");
         } else {
             $("#credit-fields").addClass("d-none");
         }
@@ -42,7 +41,7 @@ $(document).ready(function () {
 
         if (value == 'same-address') {
             $("#address-fields").removeClass("d-none");
-            $input.attr("required");
+
         } else {
             $("#address-fields").addClass("d-none");
         }
