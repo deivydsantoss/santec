@@ -12,29 +12,16 @@ Class Orders extends Model{
         }
     }
 
-    public function addOrder($name_product,$id_maker,$quantity,$unit_price,$total_price, $delivery_time, $delivery_date)
+    public function addOrder($last_id_client, $last_id_address, $total, $delivery_method, $payment_method)
     {
 
-	    $sql = $this->db->prepare(
-            "INSERT INTO Orders SET 
-            id_product = :name,
-            id_makers = :id_maker, 
-            quantity = :quantity, 
-            total_price = :total_price, 
-            unit_price = :unit_price, 
-            delivery_time = :delivery_time, 
-            delivery_date = :delivery_date, 
-            situation = '1'"
-        );
+	    $sql = $this->db->prepare("INSERT INTO Orders SET id_client = :id_client, id_address = :id_address, total_price = :total_price, delivery_method = :deliveryMethod, payment_method = :paymentMethod");
         
-        $sql->bindValue(":name", $name_product);
-        $sql->bindValue(":id_maker", $id_maker);
-        $sql->bindValue(":quantity", $quantity);
-        $sql->bindValue(":total_price", $total_price);
-        $sql->bindValue(":unit_price", $unit_price);
-
-        $sql->bindValue(":delivery_time", $delivery_time);
-        $sql->bindValue(":delivery_date", $delivery_date);
+        $sql->bindValue(":id_client", $last_id_client);
+        $sql->bindValue(":id_address", $last_id_address);
+        $sql->bindValue(":total_price", $total);
+        $sql->bindValue(":deliveryMethod", $delivery_method);
+        $sql->bindValue(":paymentMethod", $payment_method);
 
 	    $sql->execute();
 

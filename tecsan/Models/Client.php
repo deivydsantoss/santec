@@ -1,6 +1,6 @@
 <?php
 
-class Client extends Model
+Class Client extends Model
 {
         public function addClient($first_name,$last_name, $username, $email)
     {

@@ -1,6 +1,6 @@
 <?php
 
-class Stock extends Model
+Class Stock extends Model
 {
 
     private $permissions;

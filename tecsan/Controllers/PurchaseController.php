@@ -5,6 +5,7 @@ class PurchaseController extends Controller
 
     private $data = array();
 
+
     public function index()
     {
 
@@ -21,7 +22,7 @@ class PurchaseController extends Controller
         //quantidade
         $quantity = 0;
         foreach ($cart_product as $item) {
-            $quantity += $item['quantity'] ;
+            $quantity += $item['quantity'];
         }
         $this->data['cart_quantity'] = $quantity;
 
@@ -41,40 +42,52 @@ class PurchaseController extends Controller
         $this->loadTemplateSite('Purchase/index', $this->data);
     }
 
-    public function finish(){
+    public function finish()
+    {
 
         $cart_product = $_SESSION['carrinho'] ?? [];
         $this->data['cart_product'] = $cart_product;
+
+        $total = 0;
+        foreach ($cart_product as $item) {
+            $total += $item['price'] * $item['quantity'];
+        }
+        $this->data['cart_total'] = $total;
 
 
         $client = new Client();
 
         $address = new Address();
 
-        // echo'<pre>';
-        // var_dump($_SESSION['carrinho']);
-        // echo '<br>';
-        // echo'<pre>';
-        // var_dump($_POST);
-        // exit;
+        $orders = new Orders();
+
 
         if (isset($_REQUEST['purchase'])) {
-            
+
             $first_name = addslashes(trim($_POST['firstName']));
-            $last_name = addslashes( (trim($_POST['lastName'])));
+            $last_name = addslashes((trim($_POST['lastName'])));
             $username = addslashes(trim($_POST['username']));
             $email = addslashes(trim($_POST['email']));
 
-            $client->addClient($first_name,$last_name, $username, $email);
+            $last_id_client = $client->addClient($first_name, $last_name, $username, $email);
 
             $road = addslashes(trim($_POST['road']));
             $complement = addslashes(trim($_POST['complement']));
 
-            $address->addAddress($road,$complement);
 
-            // redirect('Stock');
+            $last_id_address = $address->addAddress($road, $complement, $last_id_client);
 
+            $payment_method = addslashes(trim($_POST['paymentMethod']));
+            $delivery_method = addslashes(trim($_POST['deliveryMethod']));
+
+            $orders->addOrder($last_id_client, $last_id_address, $total, $delivery_method, $payment_method);
+
+            
+
+            unset($_SESSION['carrinho']);
+
+            header('Location: ' . BASE_URL . 'Purchase');
+            exit;
         }
-
     }
 }

@@ -164,7 +164,7 @@
                                         <font dir="auto" style="vertical-align: inherit;">Endereço</font>
                                     </font>
                                 </label>
-                                <input type="text" class="form-control" id="address" name="road" placeholder="Rua João, 123" required="">
+                                <input type="text" class="form-control" id="address" name="road" placeholder="Rua João, 123" >
                                 <div class="invalid-feedback">
                                     <font dir="auto" style="vertical-align: inherit;">
                                         <font dir="auto" style="vertical-align: inherit;">
@@ -195,7 +195,7 @@
                     <hr class="my-4">
 
                     <div class="form-check">
-                        <input type="radio" name="deliveryMethod" class="form-check-input" value="same-address">
+                        <input type="radio" id="same-address" name="deliveryMethod" class="form-check-input" value="same-address">
                         <label class="form-check-label" for="same-address">
                             <font dir="auto" style="vertical-align: inherit;">
                                 <font dir="auto" style="vertical-align: inherit;">Entrega</font>
@@ -203,7 +203,7 @@
                         </label>
                     </div>
                     <div class="form-check">
-                        <input type="radio" name="deliveryMethod" class="form-check-input" value="save-info">
+                        <input type="radio" id="save-info" name="deliveryMethod" class="form-check-input" value="save-info">
                         <label class="form-check-label" for="save-info">
                             <font dir="auto" style="vertical-align: inherit;">
                                 <font dir="auto" style="vertical-align: inherit;">Retirada</font>
@@ -255,7 +255,7 @@
                                     <font dir="auto" style="vertical-align: inherit;">Nome no cartão</font>
                                 </font>
                             </label>
-                            <input type="text" class="form-control" id="cc-name" placeholder="" required="">
+                            <input type="text" class="form-control" id="cc-name" placeholder="">
                             <small class="text-muted">
                                 <font dir="auto" style="vertical-align: inherit;">
                                     <font dir="auto" style="vertical-align: inherit;">Nome completo conforme consta no cartão.</font>
@@ -276,7 +276,7 @@
                                     <font dir="auto" style="vertical-align: inherit;">Número do cartão</font>
                                 </font>
                             </label>
-                            <input type="text" class="form-control" id="cc-number" placeholder="" required="">
+                            <input type="text" class="form-control" id="cc-number" placeholder="" >
                             <div class="invalid-feedback">
                                 <font dir="auto" style="vertical-align: inherit;">
                                     <font dir="auto" style="vertical-align: inherit;">
@@ -292,7 +292,7 @@
                                     <font dir="auto" style="vertical-align: inherit;">data de validade</font>
                                 </font>
                             </label>
-                            <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
+                            <input type="text" class="form-control" id="cc-expiration" placeholder="" >
                             <div class="invalid-feedback">
                                 <font dir="auto" style="vertical-align: inherit;">
                                     <font dir="auto" style="vertical-align: inherit;">
@@ -308,7 +308,7 @@
                                     <font dir="auto" style="vertical-align: inherit;">O código triplo (CVV)</font>
                                 </font>
                             </label>
-                            <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
+                            <input type="text" class="form-control" id="cc-cvv" placeholder="" >
                             <div class="invalid-feedback">
                                 <font dir="auto" style="vertical-align: inherit;">
                                     <font dir="auto" style="vertical-align: inherit;">
