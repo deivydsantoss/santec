@@ -25,6 +25,8 @@
         }
     </style>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
@@ -35,15 +37,14 @@
                     <span class="align-middle">Administrativo</span>
                 </a>
                 <ul class="sidebar-nav">
-                    <!-- Dashboard Desactive -->
-                    <!-- <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Dashboard") ? 'active' : ''; ?>">
+                    <!-- Dashboard -->
+                    <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Dashboard") ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="<?= BASE_URL . 'Home'; ?>">
                             <i class="" data-feather="pie-chart"></i>
                             <span class="align-middle">DashBoard</span>
                         </a>
-                    </li> -->
+                    </li>
                     
-
             
                     <!-- Stock -->
                     <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Estoque") ? 'active' : ''; ?>">

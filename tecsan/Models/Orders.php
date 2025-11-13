@@ -94,9 +94,14 @@ Class Orders extends Model{
 		$sql = $this->db->prepare(
             "SELECT
                 id_order,
+                id_client,
+                id_address,
+                total_price,
                 purchase_date,
                 delivery_date,
-                total_price
+                payment_method,
+                delivery_method,
+                situation
             FROM
                 Orders"
             );

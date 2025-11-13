@@ -108,12 +108,15 @@
 						<table id="datatables-reponsive" class="table dataTable no-footer dtr-inline table-hover" style="width: 100%;" role="grid" aria-describedby="datatables-reponsive_info">
 							<thead>
 								<tr>
+									<th>ID</th>
 									<th>Cliente</th>
-									<th>Status</th>
 									<th>Preço da Compra</th>
+									<th>Metodo de Pagamento</th>
+									<th>Metodo de Recebimento</th>
 									<th>Endereço</th>
 									<th>Data de compra</th>
 									<th>Prazo</th>
+									<th>Status</th>
 									<th>Ações</th>
 								</tr>
 							</thead>
@@ -122,12 +125,15 @@
 								<?php if (isset($orders_list)) : ?>
 									<?php foreach ($orders_list as $order) : ?>
 										<tr>
+											<td><?= $order['id_order']; ?></td>
 											<td><?= $order['id_client']; ?></td>
-											<td><?= $order['situation']; ?></td>
 											<td>R$ <?= number_format($order['total_price'], 2, ',', '.'); ?></td>
+											<td><?= $order['payment_method']; ?></td>
+											<td><?= $order['delivery_method']; ?></td>
 											<td><?= $order['id_address']; ?></td>
 											<td><?= date('d/m/Y', strtotime($order['purchase_date'])); ?></td>
 											<td>5 dias</td>
+											<td><?= $order['situation']; ?></td>
 											<td class="table-action align-content-center" width="75">
 												<div class="">
 													<button type="button" class="btn " data-bs-toggle="dropdown" aria-expanded="false">
