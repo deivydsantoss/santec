@@ -1,6 +1,6 @@
 <?php
 
-Class Stock extends Model
+class Stock extends Model
 {
 
     private $permissions;
@@ -78,6 +78,23 @@ Class Stock extends Model
         $sql = $this->db->prepare("DELETE FROM stock WHERE id_product = :delete");
         $sql->bindValue(":delete", $delete);
         $sql->execute();
+    }
+
+
+    public function vendaRealizada( $id_product,$quantity)
+    {
+
+        $sql = $this->db->prepare("UPDATE stock SET quantity = quantity - :quantity WHERE id_product = :id_product");
+
+        $sql->bindValue(":quantity", $quantity);
+        $sql->bindValue(":id_product", $id_product);
+
+
+        if ($sql->execute()) {
+            return  true;
+        } else {
+            return false;
+        }
     }
 
     public function getList()
@@ -169,7 +186,8 @@ Class Stock extends Model
         return $data;
     }
 
-    public function selectForId($id_product){
+    public function selectForId($id_product)
+    {
         $data = array();
         $sql = $this->db->prepare(
             "SELECT * FROM stock WHERE id_product = :id_product"

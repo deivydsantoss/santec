@@ -9,7 +9,7 @@
             </h2>
             <p class="lead">
                 <font dir="auto" style="vertical-align: inherit;">
-                    <font dir="auto" style="vertical-align: inherit;">Abaixo, segue um exemplo de um formulário construído inteiramente usando os controles de formulário do Bootstrap. Cada conjunto de formulários obrigatórios possui uma condição de validação que pode ser acionada ao tentar enviar o formulário sem preenchê-lo.</font>
+                    <font dir="auto" style="vertical-align: inherit;">Abaixo, segue um formulário que deverá ser preenchido para que a compra seja efetuada, atenção nos dados em que coloca para não ocorrer nenhuma falha e sua compra ser realizada.</font>
                 </font>
             </p>
         </div>
@@ -19,12 +19,14 @@
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-muted">
                         <font dir="auto" style="vertical-align: inherit;">
-                            <font dir="auto" style="vertical-align: inherit;">carrinho de compras</font>
+                            <font dir="auto" style="vertical-align: inherit;">
+                                <i class="text-secondary" data-feather="shopping-cart"></i>
+                            </font>
                         </font>
                     </span>
                     <span class="badge bg-secondary rounded-pill">
                         <font dir="auto" style="vertical-align: inherit;">
-                            <font dir="auto" style="vertical-align: inherit;"><?= $cart_quantity; ?></font>
+                            <font dir="auto" style="vertical-align: inherit;"><?= $cart_quantity;?></font>
                         </font>
                     </span>
                 </h4>

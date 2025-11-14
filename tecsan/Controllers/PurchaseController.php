@@ -61,6 +61,10 @@ class PurchaseController extends Controller
 
         $orders = new Orders();
 
+        $items = new Items();
+
+        $stock = new Stock();
+
 
         if (isset($_REQUEST['purchase'])) {
 
@@ -80,9 +84,16 @@ class PurchaseController extends Controller
             $payment_method = addslashes(trim($_POST['paymentMethod']));
             $delivery_method = addslashes(trim($_POST['deliveryMethod']));
 
-            $orders->addOrder($last_id_client, $last_id_address, $total, $delivery_method, $payment_method);
+            $last_id_order = $orders->addOrder($last_id_client, $last_id_address, $total, $delivery_method, $payment_method);
 
-            
+            // echo '<pre>';
+            // var_dump($_SESSION['carrinho']);
+            // exit;
+
+            foreach ( $_SESSION['carrinho'] as $itens_carrinho) {
+                $items->addItems($itens_carrinho['id'], $last_id_order, $itens_carrinho['name'], $itens_carrinho['price'], $itens_carrinho['quantity']);
+                $stock->vendaRealizada($itens_carrinho['id'], $itens_carrinho['quantity']);
+            }
 
             unset($_SESSION['carrinho']);
 
