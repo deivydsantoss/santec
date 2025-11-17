@@ -21,17 +21,17 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h6><b>Todays Income</b></h6>
+                                <h6><b>Renda do dia</b></h6>
                                 <p class="text-muted">All Customs Value</p>
                             </div>
-                            <h4 class="text-info fw-bold">$170</h4>
+                            <h4 class="text-info fw-bold">R$ <?= number_format(5555, 2, ',', '.'); ?></h4>
                         </div>
                         <div class="progress progress-sm">
                             <div class="progress-bar bg-info w-75" role="progressbar" aria-valuenow="75"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex justify-content-between mt-2">
-                            <p class="text-muted mb-0">Change</p>
+                            <p class="text-muted mb-0">Porcentagem</p>
                             <p class="text-muted mb-0">75%</p>
                         </div>
                     </div>
@@ -42,17 +42,17 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h6><b>Total Revenue</b></h6>
-                                <p class="text-muted">All Customs Value</p>
+                                <h6><b>Receita Total</b></h6>
+                                <p class="text-muted">Produtos vendidos hoje.</p>
                             </div>
-                            <h4 class="text-success fw-bold">$120</h4>
+                            <h4 class="text-success fw-bold">R$ <?= number_format(5555, 2, ',', '.'); ?></h4>
                         </div>
                         <div class="progress progress-sm">
                             <div class="progress-bar bg-success w-25" role="progressbar" aria-valuenow="25"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex justify-content-between mt-2">
-                            <p class="text-muted mb-0">Change</p>
+                            <p class="text-muted mb-0">Porcentagem</p>
                             <p class="text-muted mb-0">25%</p>
                         </div>
                     </div>
@@ -63,8 +63,8 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h6><b>New Orders</b></h6>
-                                <p class="text-muted">Fresh Order Amount</p>
+                                <h6><b>Novos pedidos</b></h6>
+                                <p class="text-muted">Pedidos feitos hoje.</p>
                             </div>
                             <h4 class="text-danger fw-bold">15</h4>
                         </div>
@@ -73,7 +73,7 @@
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex justify-content-between mt-2">
-                            <p class="text-muted mb-0">Change</p>
+                            <p class="text-muted mb-0">Porcentagem</p>
                             <p class="text-muted mb-0">50%</p>
                         </div>
                     </div>
@@ -84,8 +84,8 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h6><b>New Users</b></h6>
-                                <p class="text-muted">Joined New User</p>
+                                <h6><b>Novos Usuarios</b></h6>
+                                <p class="text-muted">Novos usuarios compraram</p>
                             </div>
                             <h4 class="text-secondary fw-bold">12</h4>
                         </div>
@@ -114,9 +114,6 @@
                                     <canvas id="mes_mais_vendido"></canvas>
                                 </div>
                             </div>
-
-
-
 
                             <div class="col-12 col-sm-6 col-md-3 col-xl-3">
                                 <div class="card">
@@ -148,38 +145,12 @@
 
                         </div>
                         <div class="row row-card-no-pd">
-
-
-
-
-
-                            <div class="col-12 col-sm-6 col-md-3 col-xl-3">
+                            <div class="col-12 col-sm-6 col-md-3 col-xl-6">
                                 <div class="card">
                                     <canvas id="categ"></canvas>
                                 </div>
                             </div>
 
-                            <div class="col-12 col-sm-6 col-md-6 col-xl-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between">
-                                            <div>
-                                                <h6><b>Total Revenue</b></h6>
-                                                <p class="text-muted">All Customs Value</p>
-                                            </div>
-                                            <h4 class="text-success fw-bold">$120</h4>
-                                        </div>
-                                        <div class="progress progress-sm">
-                                            <div class="progress-bar bg-success w-25" role="progressbar" aria-valuenow="25"
-                                                aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <div class="d-flex justify-content-between mt-2">
-                                            <p class="text-muted mb-0">Change</p>
-                                            <p class="text-muted mb-0">25%</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="col-12 col-sm-6 col-md-6 col-xl-6">
                                 <div class="card">
@@ -189,7 +160,7 @@
                         </div>
 
 
-                            <!-- Grafico dos Produtos Linha  -->
+                        <!-- Grafico dos Produtos Linha  -->
                         <script>
                             const line = document.getElementById('mes_mais_vendido');
 
@@ -201,9 +172,11 @@
                                         label: 'Produtos Mais Vendidos',
                                         data: <?= json_encode($products_list_qtds); ?>,
                                         borderWidth: 1
+
                                     }]
                                 },
                                 options: {
+
                                     scales: {
                                         y: {
                                             beginAtZero: true
@@ -213,37 +186,65 @@
                             });
                         </script>
 
-
-                            <!-- Grafico dos Produtos   -->
+                        <!-- Grafico dos Produtos   -->
                         <script>
                             const ctx = document.getElementById('vendidos');
 
                             new Chart(ctx, {
-                                type: 'bar',
+                                type: 'line',
                                 data: {
                                     labels: <?= json_encode($products_list_names);  ?>,
-                                    datasets: [{
+                                    datasets: [
+                                    {
                                         label: 'Produtos Mais Vendidos',
                                         data: <?= json_encode($products_list_qtds); ?>,
                                         borderWidth: 1
-                                    }]
+                                    },
+                                    {
+                                        label: 'Produtos Mais Vendidos',
+                                        data: <?= json_encode($products_list_qtds); ?>,
+                                        borderWidth: 2
+                                    }
+                                ]
                                 },
                                 options: {
+                                    responsive: true,
+                                    plugins: {
+                                        title: {
+                                            display: true,
+                                            text: 'Chart.js Line Chart - Cubic interpolation mode'
+                                        },
+                                    },
+                                    interaction: {
+                                        intersect: false,
+                                    },
                                     scales: {
+                                        x: {
+                                            display: true,
+                                            title: {
+                                                display: true
+                                            }
+                                        },
                                         y: {
-                                            beginAtZero: true
+                                            display: true,
+                                            title: {
+                                                display: true,
+                                                text: 'Value'
+                                            },
+                                            suggestedMin: -10,
+                                            suggestedMax: 200
                                         }
                                     }
-                                }
+                                },
                             });
                         </script>
 
-                            <!-- Grafico dos Produtos Pizza  -->
+                        <!-- Grafico dos Produtos Pizza  -->
                         <script>
                             const pie = document.getElementById('myChart');
 
                             new Chart(pie, {
-                                type: 'pie',
+                                type: 'doughnut',
                                 data: {
                                     labels: <?= json_encode($products_list_names);  ?>,
                                     datasets: [{
@@ -262,21 +263,22 @@
                             });
                         </script>
 
-                            <!-- Grafico dos Categ Pizza  -->
+                        <!-- Grafico dos Categ Pizza  -->
                         <script>
                             const categ = document.getElementById('categ');
 
                             new Chart(categ, {
-                                type: 'pie',
+                                type: 'bar',
                                 data: {
-                                    labels: <?= json_encode($products_list_names);  ?>,
+                                    labels: <?= json_encode($products_list_categ);  ?>,
                                     datasets: [{
-                                        label: 'Produtos Vendidos',
-                                        data: <?= json_encode($products_list_qtds); ?>,
-                                        borderWidth: 1
+                                        label: 'Categorias Mais Vendidas',
+                                        data: <?= json_encode($products_list_qtds_categ); ?>,
+                                        borderWidth: 1,
                                     }]
                                 },
                                 options: {
+                                    indexAxis: 'y',
                                     scales: {
                                         y: {
                                             beginAtZero: true

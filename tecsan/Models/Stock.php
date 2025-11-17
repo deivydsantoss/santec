@@ -117,7 +117,8 @@ class Stock extends Model
                 ON C.id_category = P.id_category
             INNER JOIN makers AS M
                 ON M.id_makers = P.id_maker
-            WHERE P.situation = '1'"
+            WHERE P.situation = '1'
+            GROUP BY P.id_product"
         );
         $sql->execute();
 

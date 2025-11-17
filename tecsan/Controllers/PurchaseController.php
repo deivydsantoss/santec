@@ -78,7 +78,6 @@ class PurchaseController extends Controller
             $road = addslashes(trim($_POST['road']));
             $complement = addslashes(trim($_POST['complement']));
 
-
             $last_id_address = $address->addAddress($road, $complement, $last_id_client);
 
             $payment_method = addslashes(trim($_POST['paymentMethod']));
@@ -92,6 +91,8 @@ class PurchaseController extends Controller
 
             foreach ( $_SESSION['carrinho'] as $itens_carrinho) {
                 $items->addItems($itens_carrinho['id'], $last_id_order, $itens_carrinho['name'], $itens_carrinho['price'], $itens_carrinho['quantity']);
+
+                // apenas para descontar a quantidade de produtos vendidos
                 $stock->vendaRealizada($itens_carrinho['id'], $itens_carrinho['quantity']);
             }
 

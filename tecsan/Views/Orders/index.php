@@ -80,7 +80,7 @@
 															<input type="text" class="form-control" name="unit_price" id="params_name" placeholder="R$ 0,00" required>
 														</div>
 													</div>
-													
+
 													<div class="col-md-12">
 														<div class="form-group">
 															<label for="params_description" class="form-label">Prazo</label>
@@ -128,12 +128,36 @@
 											<td><?= $order['id_order']; ?></td>
 											<td><?= $order['id_client']; ?></td>
 											<td>R$ <?= number_format($order['total_price'], 2, ',', '.'); ?></td>
-											<td><?= $order['payment_method']; ?></td>
-											<td><?= $order['delivery_method']; ?></td>
+											<td value="<?= $order['payment_method']; ?>" >
+												<?php if ($order['payment_method'] == 'cash'): ?>
+													<span class="text-black ">Dinheiro</span>
+												<?php elseif($order['payment_method'] == 'credit'): ?>
+													<span class="text-black ">Credito</span>
+												<?php else: ?>
+													<span class="text-black ">Pix</span>
+												<?php endif; ?>
+												
+											</td>
+											<td value="<?= $order['delivery_method']; ?>">
+												<?php if ($order['delivery_method'] == 'same-address'): ?>
+
+													<span class="text-white bg-success p-2 rounded-2">Entrega</span>
+
+												<?php else: ?>
+													<span class="text-white bg-primary p-2 rounded-2">Retirada</span>
+												<?php endif; ?>
+											</td>
 											<td><?= $order['id_address']; ?></td>
 											<td><?= date('d/m/Y', strtotime($order['purchase_date'])); ?></td>
 											<td>5 dias</td>
-											<td><?= $order['situation']; ?></td>
+											<td value="<?= $order['situation'] ?>">
+
+												<?php if ($order['situation'] == 0): ?>
+
+													<span class="text-white bg-warning p-2 rounded-2">Pedido Feito</span>
+
+												<?php endif; ?>
+											</td>
 											<td class="table-action align-content-center" width="75">
 												<div class="">
 													<button type="button" class="btn " data-bs-toggle="dropdown" aria-expanded="false">
@@ -187,7 +211,7 @@
 																		<select class="form-select" aria-label="Default select example" name="id_product">
 																			<option value="" disabled selected>Selecione o fabricante</option>
 																			<?php foreach ($products_list as $products) : ?>
-																				<option value="<?= $products['id_product']; ?>"<?= $order['id_product'] == $products['id_product'] ? 'selected' : '' ?>><?= $products['name_product']; ?></option>
+																				<option value="<?= $products['id_product']; ?>" <?= $order['id_product'] == $products['id_product'] ? 'selected' : '' ?>><?= $products['name_product']; ?></option>
 																			<?php endforeach; ?>
 																		</select>
 																	</div>

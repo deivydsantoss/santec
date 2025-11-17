@@ -30,6 +30,11 @@ class HomeController extends Controller
 		// var_dump( array_column($this->data['products_list'],'name_products'));
 		// exit;
 
+		$categ = $items->getListChartCateg();
+		$this->data['products_list_categ'] = array_column($categ,'name_category');
+		$this->data['products_list_qtds_categ'] = array_column($categ,'quantity');
+
+
 		$this->data['nivel-1'] = 'Dashboard';
 
 		$this->loadTemplateAdmin('Admin/blank', $this->data);

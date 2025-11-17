@@ -22,6 +22,29 @@ Class Items extends Model
     {
         $data = array();
         $sql = $this->db->prepare("SELECT name_products, SUM(quantity) as quantity FROM Order_item  GROUP BY id_product");
+        $sql->execute(); 
+
+        if ($sql->rowCount() > 0) {
+            $data = $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return $data;
+    }
+
+        public function getListChartCateg()
+    {
+        $data = array();
+        $sql = $this->db->prepare(
+            "SELECT
+                P.id_category,
+                C.name_category,
+                SUM(G.quantity) as quantity
+            FROM Order_item AS G
+            INNER JOIN stock AS P
+                ON G.id_product = P.id_product
+            INNER JOIN category AS C
+                ON C.id_category = P.id_category
+            GROUP BY P.id_category"
+            );
         $sql->execute();
 
         if ($sql->rowCount() > 0) {
