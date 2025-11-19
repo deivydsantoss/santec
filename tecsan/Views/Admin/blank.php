@@ -24,7 +24,7 @@
                                 <h6><b>Renda do dia</b></h6>
                                 <p class="text-muted">All Customs Value</p>
                             </div>
-                            <h4 class="text-info fw-bold">R$ <?= number_format(5555, 2, ',', '.'); ?></h4>
+                            <h4 class="text-info fw-bold">R$ <?= number_format($today_revenue['price'], 2, ',', '.'); ?></h4>
                         </div>
                         <div class="progress progress-sm">
                             <div class="progress-bar bg-info w-75" role="progressbar" aria-valuenow="75"
@@ -45,7 +45,7 @@
                                 <h6><b>Receita Total</b></h6>
                                 <p class="text-muted">Produtos vendidos hoje.</p>
                             </div>
-                            <h4 class="text-success fw-bold">R$ <?= number_format(5555, 2, ',', '.'); ?></h4>
+                            <h4 class="text-success fw-bold">R$ <?= number_format($total_revenue['price'], 2, ',', '.'); ?></h4>
                         </div>
                         <div class="progress progress-sm">
                             <div class="progress-bar bg-success w-25" role="progressbar" aria-valuenow="25"
@@ -109,9 +109,9 @@
                     </div>
                     <div class="card-body">
                         <div class="row row-card-no-pd">
-                            <div class="col-12 col-sm-6 col-md-6 col-xl-6">
+                            <div class="col-12 col-sm-6 col-md-3 col-xl-6">
                                 <div class="card">
-                                    <canvas id="mes_mais_vendido"></canvas>
+                                    <canvas id="categ"></canvas>
                                 </div>
                             </div>
 
@@ -129,7 +129,7 @@
                                                 <h6><b>Total Revenue</b></h6>
                                                 <p class="text-muted">All Customs Value</p>
                                             </div>
-                                            <h4 class="text-success fw-bold">$120</h4>
+                                            <h4 class="text-success fw-bold"><?= $today_revenue['price']; ?></h4>
                                         </div>
                                         <div class="progress progress-sm">
                                             <div class="progress-bar bg-success w-25" role="progressbar" aria-valuenow="25"
@@ -144,7 +144,7 @@
                             </div>
 
                         </div>
-                        <div class="row row-card-no-pd">
+                        <!-- <div class="row row-card-no-pd">
                             <div class="col-12 col-sm-6 col-md-3 col-xl-6">
                                 <div class="card">
                                     <canvas id="categ"></canvas>
@@ -157,7 +157,7 @@
                                     <canvas id="vendidos"></canvas>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <!-- Grafico dos Produtos Linha  -->

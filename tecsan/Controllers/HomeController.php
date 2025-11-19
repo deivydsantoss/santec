@@ -34,6 +34,9 @@ class HomeController extends Controller
 		$this->data['products_list_categ'] = array_column($categ,'name_category');
 		$this->data['products_list_qtds_categ'] = array_column($categ,'quantity');
 
+		$this->data['today_revenue'] = $items->getTodayRevenue();
+
+		$this->data['total_revenue'] = $items->getTotalRevenue();
 
 		$this->data['nivel-1'] = 'Dashboard';
 
