@@ -21,10 +21,19 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h6><b>Renda do dia</b></h6>
-                                <p class="text-muted">All Customs Value</p>
+                                <h6><b>Receita Diaria</b></h6>
+                                <p class="text-muted">Vendas de hoje.</p>
                             </div>
-                            <h4 class="text-info fw-bold">R$ <?= number_format($today_revenue['price'], 2, ',', '.'); ?></h4>
+                            <h4 class="text-info fw-bold">
+                                <?php if (!empty($today_revenue['price'])): ?>
+
+                                    R$ <?= number_format($today_revenue['price'], 2, ',', '.'); ?>
+
+                                <?php else: ?>
+                                    <p class="text-muted">R$ 00,00</p>
+                                <?php endif; ?>
+
+                            </h4>
                         </div>
                         <div class="progress progress-sm">
                             <div class="progress-bar bg-info w-75" role="progressbar" aria-valuenow="75"
@@ -43,9 +52,17 @@
                         <div class="d-flex justify-content-between">
                             <div>
                                 <h6><b>Receita Total</b></h6>
-                                <p class="text-muted">Produtos vendidos hoje.</p>
+                                <p class="text-muted">Renda desse mês.</p>
                             </div>
-                            <h4 class="text-success fw-bold">R$ <?= number_format($total_revenue['price'], 2, ',', '.'); ?></h4>
+                            <h4 class="text-success fw-bold">
+                                <?php if (!empty($total_revenue['total_price'])): ?>
+
+                                    R$ <?= number_format($total_revenue['total_price'], 2, ',', '.'); ?>
+
+                                <?php else: ?>
+                                    <p class="text-muted">R$ 00,00</p>
+                                <?php endif; ?>
+                            </h4>
                         </div>
                         <div class="progress progress-sm">
                             <div class="progress-bar bg-success w-25" role="progressbar" aria-valuenow="25"
@@ -66,7 +83,15 @@
                                 <h6><b>Novos pedidos</b></h6>
                                 <p class="text-muted">Pedidos feitos hoje.</p>
                             </div>
-                            <h4 class="text-danger fw-bold">15</h4>
+                            <h4 class="text-danger fw-bold">
+                                <?php if (!empty($quantity_today['quantity'])): ?>
+
+                                    <?= $quantity_today['quantity']; ?>
+
+                                <?php else: ?>
+                                    <p class="text-muted">Nenhuma venda.</p>
+                                <?php endif; ?>
+                            </h4>
                         </div>
                         <div class="progress progress-sm">
                             <div class="progress-bar bg-danger w-50" role="progressbar" aria-valuenow="50"
@@ -85,9 +110,17 @@
                         <div class="d-flex justify-content-between">
                             <div>
                                 <h6><b>Novos Usuarios</b></h6>
-                                <p class="text-muted">Novos usuarios compraram</p>
+                                <p class="text-muted">Usuarios de hoje.</p>
                             </div>
-                            <h4 class="text-secondary fw-bold">12</h4>
+                            <h4 class="text-secondary fw-bold">
+                                <?php if (!empty($client_today['quantity'])): ?>
+
+                                    <?= $client_today['quantity']; ?>
+
+                                <?php else: ?>
+                                    <p class="text-muted">Nenhum usuario.</p>
+                                <?php endif; ?>
+                            </h4>
                         </div>
                         <div class="progress progress-sm">
                             <div class="progress-bar bg-secondary w-25" role="progressbar" aria-valuenow="25"
@@ -129,7 +162,15 @@
                                                 <h6><b>Total Revenue</b></h6>
                                                 <p class="text-muted">All Customs Value</p>
                                             </div>
-                                            <h4 class="text-success fw-bold"><?= $today_revenue['price']; ?></h4>
+                                            <h4 class="text-success fw-bold">
+                                                <?php if (!empty($today_revenue['price'])): ?>
+
+                                                    R$ <?= number_format($today_revenue['price'], 2, ',', '.'); ?>
+
+                                                <?php else: ?>
+                                                    <p class="text-muted">Nenhuma venda.</p>
+                                                <?php endif; ?>
+                                            </h4>
                                         </div>
                                         <div class="progress progress-sm">
                                             <div class="progress-bar bg-success w-25" role="progressbar" aria-valuenow="25"
@@ -194,18 +235,17 @@
                                 type: 'line',
                                 data: {
                                     labels: <?= json_encode($products_list_names);  ?>,
-                                    datasets: [
-                                    {
-                                        label: 'Produtos Mais Vendidos',
-                                        data: <?= json_encode($products_list_qtds); ?>,
-                                        borderWidth: 1
-                                    },
-                                    {
-                                        label: 'Produtos Mais Vendidos',
-                                        data: <?= json_encode($products_list_qtds); ?>,
-                                        borderWidth: 2
-                                    }
-                                ]
+                                    datasets: [{
+                                            label: 'Produtos Mais Vendidos',
+                                            data: <?= json_encode($products_list_qtds); ?>,
+                                            borderWidth: 1
+                                        },
+                                        {
+                                            label: 'Produtos Mais Vendidos',
+                                            data: <?= json_encode($products_list_qtds); ?>,
+                                            borderWidth: 2
+                                        }
+                                    ]
                                 },
                                 options: {
                                     responsive: true,

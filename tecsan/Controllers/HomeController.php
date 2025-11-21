@@ -21,6 +21,8 @@ class HomeController extends Controller
 
 	public function index()
 	{
+		$client = new Client();
+		$orders = new Orders();
 		$items = new Items();
 		$products = $items->getListChart();
 
@@ -35,8 +37,12 @@ class HomeController extends Controller
 		$this->data['products_list_qtds_categ'] = array_column($categ,'quantity');
 
 		$this->data['today_revenue'] = $items->getTodayRevenue();
-
 		$this->data['total_revenue'] = $items->getTotalRevenue();
+		
+
+		$this->data['quantity_today'] = $orders->countOrders();
+
+		$this->data['client_today'] = $client->countClient();
 
 		$this->data['nivel-1'] = 'Dashboard';
 

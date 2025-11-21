@@ -79,7 +79,7 @@ class Items extends Model
         $data = array();
         $sql = $this->db->prepare(
             "SELECT 
-                SUM(G.products_price_total) as price
+                SUM(G.products_price_total) as total_price
             FROM Order_item AS G
             INNER JOIN Orders AS O
                 ON G.id_order = O.id_order

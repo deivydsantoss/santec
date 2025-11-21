@@ -1,10 +1,12 @@
 <?php
 
-Class Orders extends Model{
+class Orders extends Model
+{
 
     private $permissions;
 
-    public function hasPermission($name){
+    public function hasPermission($name)
+    {
         if (in_array($name, $this->permissions)) {
             return true;
         } else {
@@ -15,24 +17,23 @@ Class Orders extends Model{
     public function addOrder($last_id_client, $last_id_address, $total, $delivery_method, $payment_method)
     {
 
-	    $sql = $this->db->prepare("INSERT INTO Orders SET id_client = :id_client, id_address = :id_address, total_price = :total_price, delivery_method = :deliveryMethod, payment_method = :paymentMethod");
-        
+        $sql = $this->db->prepare("INSERT INTO Orders SET id_client = :id_client, id_address = :id_address, total_price = :total_price, delivery_method = :deliveryMethod, payment_method = :paymentMethod");
+
         $sql->bindValue(":id_client", $last_id_client);
         $sql->bindValue(":id_address", $last_id_address);
         $sql->bindValue(":total_price", $total);
         $sql->bindValue(":deliveryMethod", $delivery_method);
         $sql->bindValue(":paymentMethod", $payment_method);
 
-	    $sql->execute();
+        $sql->execute();
 
-	    return $this->db->lastInsertId();
-
+        return $this->db->lastInsertId();
     }
 
     public function editOrder($id_order, $name_product, $id_maker, $quantity, $total_price, $unit_price, $delivery_time, $delivery_date)
     {
 
-	    $sql = $this->db->prepare(
+        $sql = $this->db->prepare(
             "UPDATE Orders SET 
             id_product = :name,
             id_makers = :id_maker, 
@@ -41,9 +42,9 @@ Class Orders extends Model{
             unit_price = :unit_price, 
             delivery_time = :delivery_time, 
             delivery_date = :delivery_date 
-            WHERE id_order = :id_order" 
+            WHERE id_order = :id_order"
         );
-        
+
         $sql->bindValue(":id_order", $id_order);
         $sql->bindValue(":name", $name_product);
         $sql->bindValue(":id_maker", $id_maker);
@@ -53,15 +54,15 @@ Class Orders extends Model{
         $sql->bindValue(":delivery_time", $delivery_time);
         $sql->bindValue(":delivery_date", $delivery_date);
 
-	    $sql->execute();
+        $sql->execute();
 
-	    return $this->db->lastInsertId();
+        return $this->db->lastInsertId();
+    }
 
-}
-
-    public function ordersConcluded(){
+    public function ordersConcluded()
+    {
         $data = array();
-		$sql = $this->db->prepare(
+        $sql = $this->db->prepare(
             "SELECT
                 O.id_order,
                 O.delivery_date,
@@ -80,18 +81,19 @@ Class Orders extends Model{
             INNER JOIN makers AS M
                 ON M.id_makers = O.id_makers
             WHERE P.situation = '0'"
-            );
-		$sql->execute();
+        );
+        $sql->execute();
 
-		if($sql->rowCount()>0){
-			$data = $sql->fetchAll(PDO::FETCH_ASSOC);
-		}
-		return $data;
+        if ($sql->rowCount() > 0) {
+            $data = $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return $data;
     }
-    
-    public function getOrders(){
+
+    public function getOrders()
+    {
         $data = array();
-		$sql = $this->db->prepare(
+        $sql = $this->db->prepare(
             "SELECT
                 id_order,
                 id_client,
@@ -104,13 +106,29 @@ Class Orders extends Model{
                 situation
             FROM
                 Orders"
-            );
-		$sql->execute();
+        );
+        $sql->execute();
 
-		if($sql->rowCount()>0){
-			$data = $sql->fetchAll(PDO::FETCH_ASSOC);
-		}
-		return $data;
+        if ($sql->rowCount() > 0) {
+            $data = $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return $data;
     }
 
+    public function countOrders()
+    {
+        $data = array();
+        $sql = $this->db->prepare(
+            "SELECT COUNT(purchase_date) AS quantity
+            FROM Orders
+            WHERE purchase_date >= CURDATE()
+                AND purchase_date < CURDATE() + INTERVAL 1 DAY"
+        );
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            $data = $sql->fetch(PDO::FETCH_ASSOC);
+        }
+        return $data;
+    }
 }

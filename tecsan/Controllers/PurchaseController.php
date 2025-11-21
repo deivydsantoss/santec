@@ -73,7 +73,18 @@ class PurchaseController extends Controller
             $username = addslashes(trim($_POST['username']));
             $email = addslashes(trim($_POST['email']));
 
-            $last_id_client = $client->addClient($first_name, $last_name, $username, $email);
+            // echo '<pre>';
+            // var_dump($_POST);
+            // exit;
+
+            $search = $client->searchClient($username, $email);
+
+            if(empty($search)){
+                $last_id_client = $client->addClient($first_name, $last_name, $username, $email);
+            }else {
+                $last_id_client = $search['id_client'];
+            }
+            
 
             $road = addslashes(trim($_POST['road']));
             $complement = addslashes(trim($_POST['complement']));
