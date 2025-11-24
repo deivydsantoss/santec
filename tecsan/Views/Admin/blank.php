@@ -10,12 +10,13 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Index</li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="">Config</a></li>
                     </ol>
                 </nav>
             </div>
         </div>
         <div class="row row-card-no-pd">
+
             <div class="col-12 col-sm-6 col-md-6 col-xl-3">
                 <div class="card">
                     <div class="card-body">
@@ -36,16 +37,17 @@
                             </h4>
                         </div>
                         <div class="progress progress-sm">
-                            <div class="progress-bar bg-info w-75" role="progressbar" aria-valuenow="75"
+                            <div class="progress-bar bg-info " style="width: <?= empty($today_revenue['price']) ? '0': (($today_revenue['price'] / 1400) * 100) ?>% !important;" role="progressbar" 
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Porcentagem</p>
-                            <p class="text-muted mb-0">75%</p>
+                            <p class="text-muted mb-0"><?= empty($today_revenue['price']) ? '0': number_format((($today_revenue['price'] / 1400) * 100), -1)  ?>%</p>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="col-12 col-sm-6 col-md-6 col-xl-3">
                 <div class="card">
                     <div class="card-body">
@@ -65,16 +67,17 @@
                             </h4>
                         </div>
                         <div class="progress progress-sm">
-                            <div class="progress-bar bg-success w-25" role="progressbar" aria-valuenow="25"
+                            <div class="progress-bar bg-success " style="width: <?= ($total_revenue['total_price'] / 40000) * 100; ?>% !important;"   aria-valuenow="<?= ($total_revenue['total_price'] / 40000) * 100 ?>" role="progressbar"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Porcentagem</p>
-                            <p class="text-muted mb-0">25%</p>
+                            <p class="text-muted mb-0"><?= number_format(($total_revenue['total_price'] / 40000) * 100, -1)  ?>%</p>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="col-12 col-sm-6 col-md-6 col-xl-3">
                 <div class="card">
                     <div class="card-body">
@@ -94,12 +97,12 @@
                             </h4>
                         </div>
                         <div class="progress progress-sm">
-                            <div class="progress-bar bg-danger w-50" role="progressbar" aria-valuenow="50"
+                            <div class="progress-bar bg-danger " style="width:<?= empty($quantity_today['quantity']) ? '0': (($quantity_today['quantity'] / 200) * 100) ?>% !important;" role="progressbar"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Porcentagem</p>
-                            <p class="text-muted mb-0">50%</p>
+                            <p class="text-muted mb-0"><?= empty($quantity_today['quantity']) ? '0': number_format((($quantity_today['quantity'] / 200) * 100), +1)  ?>%</p>
                         </div>
                     </div>
                 </div>
@@ -123,12 +126,12 @@
                             </h4>
                         </div>
                         <div class="progress progress-sm">
-                            <div class="progress-bar bg-secondary w-25" role="progressbar" aria-valuenow="25"
+                            <div class="progress-bar bg-secondary" style="width:<?= empty($client_today['quantity']) ? '0': (($client_today['quantity'] / 200) * 100) ?>% !important;" role="progressbar" 
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex justify-content-between mt-2">
-                            <p class="text-muted mb-0">Change</p>
-                            <p class="text-muted mb-0">25%</p>
+                            <p class="text-muted mb-0">Porcentagem</p>
+                            <p class="text-muted mb-0"><?= empty($client_today['quantity']) ? '0': number_format((($client_today['quantity'] / 200) * 100), +1)  ?>%</p>
                         </div>
                     </div>
                 </div>
@@ -138,7 +141,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title mb-0">Empty card</h5>
+                        <h5 class="card-title mb-0">Dashboard</h5>
                     </div>
                     <div class="card-body">
                         <div class="row row-card-no-pd">
@@ -159,180 +162,81 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
                                             <div>
-                                                <h6><b>Total Revenue</b></h6>
-                                                <p class="text-muted">All Customs Value</p>
+                                                <h6><b>Relatório de Vendas</b></h6>
+                                                <p class="text-muted">Produto mais vendido foi:</p>
                                             </div>
                                             <h4 class="text-success fw-bold">
-                                                <?php if (!empty($today_revenue['price'])): ?>
 
-                                                    R$ <?= number_format($today_revenue['price'], 2, ',', '.'); ?>
+                                                <p class="text-muted">Qtd</p>
 
-                                                <?php else: ?>
-                                                    <p class="text-muted">Nenhuma venda.</p>
-                                                <?php endif; ?>
                                             </h4>
                                         </div>
-                                        <div class="progress progress-sm">
-                                            <div class="progress-bar bg-success w-25" role="progressbar" aria-valuenow="25"
-                                                aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <div class="d-flex justify-content-between mt-2">
-                                            <p class="text-muted mb-0">Change</p>
-                                            <p class="text-muted mb-0">25%</p>
+                                        <div class="">
+                                            <div class="d-flex justify-content-between mt-2">
+                                                <p class="text-muted mb-0">Produto X</p>
+                                                <p class="text-muted mb-0">1567</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </div>
-                        <!-- <div class="row row-card-no-pd">
-                            <div class="col-12 col-sm-6 col-md-3 col-xl-6">
-                                <div class="card">
-                                    <canvas id="categ"></canvas>
-                                </div>
                             </div>
 
 
-                            <div class="col-12 col-sm-6 col-md-6 col-xl-6">
-                                <div class="card">
-                                    <canvas id="vendidos"></canvas>
-                                </div>
-                            </div>
-                        </div> -->
+                            <!-- Grafico dos Produtos Pizza  -->
+                            <script>
+                                const pie = document.getElementById('myChart');
 
-
-                        <!-- Grafico dos Produtos Linha  -->
-                        <script>
-                            const line = document.getElementById('mes_mais_vendido');
-
-                            new Chart(line, {
-                                type: 'line',
-                                data: {
-                                    labels: <?= json_encode($products_list_names);  ?>,
-                                    datasets: [{
-                                        label: 'Produtos Mais Vendidos',
-                                        data: <?= json_encode($products_list_qtds); ?>,
-                                        borderWidth: 1
-
-                                    }]
-                                },
-                                options: {
-
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true
-                                        }
-                                    }
-                                }
-                            });
-                        </script>
-
-                        <!-- Grafico dos Produtos   -->
-                        <script>
-                            const ctx = document.getElementById('vendidos');
-
-                            new Chart(ctx, {
-                                type: 'line',
-                                data: {
-                                    labels: <?= json_encode($products_list_names);  ?>,
-                                    datasets: [{
-                                            label: 'Produtos Mais Vendidos',
+                                new Chart(pie, {
+                                    type: 'doughnut',
+                                    data: {
+                                        labels: <?= json_encode($products_list_names);  ?>,
+                                        datasets: [{
+                                            label: 'Produtos Vendidos',
                                             data: <?= json_encode($products_list_qtds); ?>,
                                             borderWidth: 1
-                                        },
-                                        {
-                                            label: 'Produtos Mais Vendidos',
-                                            data: <?= json_encode($products_list_qtds); ?>,
-                                            borderWidth: 2
-                                        }
-                                    ]
-                                },
-                                options: {
-                                    responsive: true,
-                                    plugins: {
-                                        title: {
-                                            display: true,
-                                            text: 'Chart.js Line Chart - Cubic interpolation mode'
-                                        },
+                                        }]
                                     },
-                                    interaction: {
-                                        intersect: false,
-                                    },
-                                    scales: {
-                                        x: {
-                                            display: true,
-                                            title: {
-                                                display: true
+                                    options: {
+                                        scales: {
+                                            y: {
+                                                beginAtZero: true
                                             }
-                                        },
-                                        y: {
-                                            display: true,
-                                            title: {
-                                                display: true,
-                                                text: 'Value'
-                                            },
-                                            suggestedMin: -10,
-                                            suggestedMax: 200
                                         }
                                     }
-                                },
-                            });
-                        </script>
+                                });
+                            </script>
 
-                        <!-- Grafico dos Produtos Pizza  -->
-                        <script>
-                            const pie = document.getElementById('myChart');
+                            <!-- Grafico dos Categ Pizza  -->
+                            <script>
+                                const categ = document.getElementById('categ');
 
-                            new Chart(pie, {
-                                type: 'doughnut',
-                                data: {
-                                    labels: <?= json_encode($products_list_names);  ?>,
-                                    datasets: [{
-                                        label: 'Produtos Vendidos',
-                                        data: <?= json_encode($products_list_qtds); ?>,
-                                        borderWidth: 1
-                                    }]
-                                },
-                                options: {
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true
+                                new Chart(categ, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: <?= json_encode($products_list_categ);  ?>,
+                                        datasets: [{
+                                            label: 'Categorias Mais Vendidas',
+                                            data: <?= json_encode($products_list_qtds_categ); ?>,
+                                            borderWidth: 1,
+                                        }]
+                                    },
+                                    options: {
+                                        indexAxis: 'y',
+                                        scales: {
+                                            y: {
+                                                beginAtZero: true
+                                            }
                                         }
                                     }
-                                }
-                            });
-                        </script>
+                                });
+                            </script>
 
-                        <!-- Grafico dos Categ Pizza  -->
-                        <script>
-                            const categ = document.getElementById('categ');
-
-                            new Chart(categ, {
-                                type: 'bar',
-                                data: {
-                                    labels: <?= json_encode($products_list_categ);  ?>,
-                                    datasets: [{
-                                        label: 'Categorias Mais Vendidas',
-                                        data: <?= json_encode($products_list_qtds_categ); ?>,
-                                        borderWidth: 1,
-                                    }]
-                                },
-                                options: {
-                                    indexAxis: 'y',
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true
-                                        }
-                                    }
-                                }
-                            });
-                        </script>
+                        </div>
 
                     </div>
-
                 </div>
             </div>
-        </div>
 
-    </div>
+        </div>
 </main>

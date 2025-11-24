@@ -109,7 +109,7 @@ class PurchaseController extends Controller
 
             unset($_SESSION['carrinho']);
 
-            header('Location: ' . BASE_URL . 'Purchase');
+            header('Location: ' . BASE_URL . 'Store');
             exit;
         }
     }

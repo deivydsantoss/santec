@@ -44,8 +44,16 @@ class HomeController extends Controller
 
 		$this->data['client_today'] = $client->countClient();
 
+
 		$this->data['nivel-1'] = 'Dashboard';
 
 		$this->loadTemplateAdmin('Admin/blank', $this->data);
+	}
+
+	public function config(){
+
+
+
+		$this->loadTemplateAdmin('Admin/config', $this->data);
 	}
 }

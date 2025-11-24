@@ -159,7 +159,7 @@ Class StockController extends Controller {
                 $novo_nome = uniqid();
                 $extension = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION));
 
-                if($extension != "jpg" && $extension != "png"){
+                if($extension != "jpeg" && $extension != "png"){
                     die("Tipo de arquivo não aceito!");
                 }
 
