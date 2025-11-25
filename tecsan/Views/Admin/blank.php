@@ -10,7 +10,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a href="">Config</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="<?= BASE_URL . 'Home/config'; ?>">Config</a></li>
                     </ol>
                 </nav>
             </div>
@@ -37,12 +37,12 @@
                             </h4>
                         </div>
                         <div class="progress progress-sm">
-                            <div class="progress-bar bg-info " style="width: <?= empty($today_revenue['price']) ? '0': (($today_revenue['price'] / 1400) * 100) ?>% !important;" role="progressbar" 
+                            <div class="progress-bar bg-info " style="width: <?= empty($today_revenue['price']) ? '0' : (($today_revenue['price'] / 1400) * 100) ?>% !important;" role="progressbar"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Porcentagem</p>
-                            <p class="text-muted mb-0"><?= empty($today_revenue['price']) ? '0': number_format((($today_revenue['price'] / 1400) * 100), -1)  ?>%</p>
+                            <p class="text-muted mb-0"><?= empty($today_revenue['price']) ? '0' : number_format((($today_revenue['price'] / 1400) * 100), -1)  ?>%</p>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                             </h4>
                         </div>
                         <div class="progress progress-sm">
-                            <div class="progress-bar bg-success " style="width: <?= ($total_revenue['total_price'] / 40000) * 100; ?>% !important;"   aria-valuenow="<?= ($total_revenue['total_price'] / 40000) * 100 ?>" role="progressbar"
+                            <div class="progress-bar bg-success " style="width: <?= ($total_revenue['total_price'] / $meta['renda_mensal']) * 100; ?>% !important;" aria-valuenow="<?= ($total_revenue['total_price'] / 40000) * 100 ?>" role="progressbar"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex justify-content-between mt-2">
@@ -97,12 +97,12 @@
                             </h4>
                         </div>
                         <div class="progress progress-sm">
-                            <div class="progress-bar bg-danger " style="width:<?= empty($quantity_today['quantity']) ? '0': (($quantity_today['quantity'] / 200) * 100) ?>% !important;" role="progressbar"
+                            <div class="progress-bar bg-danger " style="width:<?= empty($quantity_today['quantity']) ? '0' : (($quantity_today['quantity'] / 200) * 100) ?>% !important;" role="progressbar"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Porcentagem</p>
-                            <p class="text-muted mb-0"><?= empty($quantity_today['quantity']) ? '0': number_format((($quantity_today['quantity'] / 200) * 100), +1)  ?>%</p>
+                            <p class="text-muted mb-0"><?= empty($quantity_today['quantity']) ? '0' : number_format((($quantity_today['quantity'] / 200) * 100), +1)  ?>%</p>
                         </div>
                     </div>
                 </div>
@@ -126,12 +126,12 @@
                             </h4>
                         </div>
                         <div class="progress progress-sm">
-                            <div class="progress-bar bg-secondary" style="width:<?= empty($client_today['quantity']) ? '0': (($client_today['quantity'] / 200) * 100) ?>% !important;" role="progressbar" 
+                            <div class="progress-bar bg-secondary" style="width:<?= empty($client_today['quantity']) ? '0' : (($client_today['quantity'] / 200) * 100) ?>% !important;" role="progressbar"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <p class="text-muted mb-0">Porcentagem</p>
-                            <p class="text-muted mb-0"><?= empty($client_today['quantity']) ? '0': number_format((($client_today['quantity'] / 200) * 100), +1)  ?>%</p>
+                            <p class="text-muted mb-0"><?= empty($client_today['quantity']) ? '0' : number_format((($client_today['quantity'] / 200) * 100), +1)  ?>%</p>
                         </div>
                     </div>
                 </div>
@@ -237,6 +237,5 @@
                     </div>
                 </div>
             </div>
-
         </div>
 </main>
